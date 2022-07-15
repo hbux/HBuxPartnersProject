@@ -1,0 +1,38 @@
+HBux & Partners Project
+-----------------------
+
+- NET Core MVC (3.1) for the UI
+- NET Core WebAPI (3.1) for the backend
+- UI is created with Bootstrap
+- HBuxPartnersAuthData (EFCore) for PURELY Login and authentication information
+- HBuxPartnersData (SSDT)
+
+Goals
+-----------------------
+- Based off John Lewis
+- Fully functioning e-commerce application
+	- Viewing products
+	- Adding to basket
+	- Check out
+	- Logging in/out with account details
+- Subscription service within application e.g.
+	- No subscription = free standard delivery
+	- Lowest cost subscription = next day delivery
+	- medium cost subscription = Same day delivery
+	- highest cost subsciption = 3-hour delivery
+- Multiple types of products (homewares, electronics, furniture) with different properties (Use of interfaces)
+
+Ideas
+-----------------------
+- Checkout as guest
+- Offers
+- Checkout offer code (e.g. 15% off with code 'NewUser')
+- Administrators can add products to the inventory
+- Reviews
+- Related products
+
+
+Notes
+-----------------------
+- Add Payment entity to ERD & add PaymentId to Order entity
+- Add Inventory entity to ERD

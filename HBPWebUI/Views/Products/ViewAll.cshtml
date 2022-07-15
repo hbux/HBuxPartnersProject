@@ -1,0 +1,44 @@
+﻿@model ProductsViewModel
+@{
+    ViewData["Title"] = "- All Products";
+}
+
+<div class="container py-4">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item"><a href="#">Products</a></li>
+            <li class="breadcrumb-item active" aria-current="page">View All</li>
+        </ol>
+    </nav>
+</div>
+
+<div class="container">
+    <div class="text-center">
+        <h1 class="h4 mb-3 fw-normal">View All (@Model.Products.Count)</h1>
+    </div>
+    <form>
+        <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-2 g-lg-3">
+            @foreach (HBPUI.Library.Models.ProductModel product in Model.Products)
+            {
+                <div class="col">
+                    <a class="text-decoration-none" asp-area="" asp-controller="Products" asp-action="Item" asp-route-id="@product.Id">
+                        <div class="card" style="width: unset;" >
+                            <img src="~/images/xbox-series-x.png" class="card-img-top" alt="Xbox Series X">
+                            <div class="card-body">
+                                <ul class="list-group list-group-flush border-bottom my-1">
+                                    <li class="list-group-item">@product.Name</li>
+                                    <li class="list-group-item fw-bold">@product.RetailPrice.ToString("C2")</li>
+                                </ul>
+                                <div class="d-grid my-2">
+                                    <button type="submit" class="btn btn-primary my-1">Add to basket</button>
+                                    @*<button type="submit" class="btn btn-warning disabled my-1">Out of stock</button>*@
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            }
+        </div>
+    </form>
+</div>
