@@ -22,14 +22,7 @@ namespace HBPApi.Controllers
         [HttpGet]
         public async Task<List<ProductModel>> GetAll()
         {
-            try
-            {
-                return await _productData.GetAllProducts();
-            }
-            catch
-            {
-                throw;
-            }
+            return await _productData.GetAllProducts();
         }
     }
 }

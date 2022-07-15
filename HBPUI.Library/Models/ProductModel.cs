@@ -10,7 +10,18 @@ namespace HBPUI.Library.Models
         public string Name { get; set; }
         public string Description { get; set; }
         public decimal RetailPrice { get; set; }
-        public int QuantityInStock { get; set; }
-        public DateTime CreateDate { get; set; }
+        public int QuantityInStock { private get; set; }
+        public bool IsInStock
+        {
+            get
+            {
+                if (QuantityInStock > 0)
+                {
+                    return true;
+                }
+
+                return false;
+            }
+        }
     }
 }

@@ -36,3 +36,6 @@ Notes
 -----------------------
 - Add Payment entity to ERD & add PaymentId to Order entity
 - Add Inventory entity to ERD
+- Add Category to ERD, similar to UserRoles and Roles, to programmatically generate categories in the dropdown
+	- Category entity, CategoryProduct entity and assign products to categories
+- Add subcategories and create a large dropdown menu

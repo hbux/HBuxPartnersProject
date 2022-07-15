@@ -23,16 +23,24 @@
             {
                 <div class="col">
                     <a class="text-decoration-none" asp-area="" asp-controller="Products" asp-action="Item" asp-route-id="@product.Id">
-                        <div class="card" style="width: unset;" >
+                        <div class="card" style="width: unset; height: 100%" >
                             <img src="~/images/xbox-series-x.png" class="card-img-top" alt="Xbox Series X">
                             <div class="card-body">
-                                <ul class="list-group list-group-flush border-bottom my-1">
-                                    <li class="list-group-item">@product.Name</li>
-                                    <li class="list-group-item fw-bold">@product.RetailPrice.ToString("C2")</li>
-                                </ul>
-                                <div class="d-grid my-2">
-                                    <button type="submit" class="btn btn-primary my-1">Add to basket</button>
-                                    @*<button type="submit" class="btn btn-warning disabled my-1">Out of stock</button>*@
+                                <p class="fw-normal text-black d-block text-truncate text-wrap" style="max-width: 100%; height: 100px; max-height: 100px;">@product.Name</p>
+                                <div class="align-text-bottom">
+                                    <ul class="list-group list-group-flush border-bottom my-1">
+                                        <li class="list-group-item fw-bold">@product.RetailPrice.ToString("C2")</li>
+                                    </ul>
+                                    <div class="d-grid my-2">
+                                        @if (product.IsInStock)
+                                        {
+                                            <button type="submit" class="btn btn-primary my-1">Add to basket</button>
+                                        }
+                                        else
+                                        {
+                                            <button type="submit" class="btn btn-warning disabled my-1">Out of stock</button>
+                                        }
+                                    </div>
                                 </div>
                             </div>
                         </div>

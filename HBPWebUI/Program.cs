@@ -8,6 +8,7 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddTransient<IApiSetup, ApiSetup>();
 builder.Services.AddTransient<IProductEndpoint, ProductEndpoint>();
+builder.Services.AddTransient<ICategoryEndpoint, CategoryEndpoint>();
 
 var app = builder.Build();
 

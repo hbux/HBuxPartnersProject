@@ -9,7 +9,7 @@
             <li class="breadcrumb-item"><a href="#">Home</a></li>
             <li class="breadcrumb-item"><a href="#">Products</a></li>
             <li class="breadcrumb-item"><a href="#">Item</a></li>
-            <li class="breadcrumb-item active" aria-current="page">31928102</li>
+            <li class="breadcrumb-item active" aria-current="page">@Model.Product.Id</li>
         </ol>
     </nav>
 </div>
@@ -67,18 +67,31 @@
             </div>
             <div class="bg-light p-2 rounded text-center">
                 <p class="fw-bold m-0">@Model.Product.RetailPrice.ToString("C2")</p>
-                <p class="fw-normal m-0">Currently in stock online</p>
-                @*<p class="fw-normal m-0">Out of stock online</p>*@
+                @if (Model.Product.IsInStock)
+                {
+                    <p class="fw-normal m-0">Currently in stock online</p>
+                }
+                else
+                {
+                    <p class="fw-normal m-0">Out of stock online</p>
+                }
+                
             </div>
-            <div class="d-grid my-2">
-                <button class="btn btn-primary btn-lg" type="button">Add to basket</button>
-            </div>
-            @*<div class="alert alert-warning d-flex align-items-center my-2" role="alert">
-                <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:"><use xlink:href="#exclamation-triangle-fill"/></svg>
-                <div>
-                We're sorry, this item is out of stock.
+            @if (Model.Product.IsInStock)
+            {
+                <div class="d-grid my-2">
+                    <button class="btn btn-primary btn-lg" type="button">Add to basket</button>
                 </div>
-            </div>*@
+            }
+            else
+            {
+                <div class="alert alert-warning d-flex align-items-center my-2" role="alert">
+                    <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                    <div>
+                    We're sorry, this item is out of stock.
+                    </div>
+                </div>
+            }
         </div>
     </div>
 </div>
