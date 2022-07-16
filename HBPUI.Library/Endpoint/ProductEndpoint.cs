@@ -17,7 +17,7 @@ namespace HBPUI.Library.Endpoint
             _api = api;
         }
 
-        public async Task<List<ProductModel>> GetAll()
+        public async Task<List<ProductModel>> GetAllProducts()
         {
             using (HttpResponseMessage response = await _api.Client.GetAsync("api/product"))
             {

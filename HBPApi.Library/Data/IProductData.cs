@@ -6,6 +6,7 @@ namespace HBPApi.Library.Data
 {
     public interface IProductData
     {
+        Task<List<CategoryModel>> GetAllCategories();
         Task<List<ProductModel>> GetAllProducts();
     }
 }

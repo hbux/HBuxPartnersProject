@@ -1,6 +1,5 @@
 HBux & Partners Project
 -----------------------
-
 - NET Core MVC (3.1) for the UI
 - NET Core WebAPI (3.1) for the backend
 - UI is created with Bootstrap
@@ -20,6 +19,7 @@ Goals
 	- Lowest cost subscription = next day delivery
 	- medium cost subscription = Same day delivery
 	- highest cost subsciption = 3-hour delivery
+	- Offer more benefits?
 - Multiple types of products (homewares, electronics, furniture) with different properties (Use of interfaces)
 
 Ideas
@@ -36,6 +36,3 @@ Notes
 -----------------------
 - Add Payment entity to ERD & add PaymentId to Order entity
 - Add Inventory entity to ERD
-- Add Category to ERD, similar to UserRoles and Roles, to programmatically generate categories in the dropdown
-	- Category entity, CategoryProduct entity and assign products to categories
-- Add subcategories and create a large dropdown menu

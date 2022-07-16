@@ -1,13 +1,13 @@
-﻿@model ProductsViewModel
+﻿@model ProductViewModel
 @{
-    ViewData["Title"] = "- All Products";
+    ViewData["Title"] = "View All";
 }
 
 <div class="container py-4">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item"><a href="#">Products</a></li>
+            <li class="breadcrumb-item"><a href="#">Product</a></li>
             <li class="breadcrumb-item active" aria-current="page">View All</li>
         </ol>
     </nav>
@@ -22,7 +22,7 @@
             @foreach (HBPUI.Library.Models.ProductModel product in Model.Products)
             {
                 <div class="col">
-                    <a class="text-decoration-none" asp-area="" asp-controller="Products" asp-action="Item" asp-route-id="@product.Id">
+                    <a class="text-decoration-none" asp-area="" asp-controller="Product" asp-action="Index" asp-route-id="@product.Id">
                         <div class="card" style="width: unset; height: 100%" >
                             <img src="~/images/xbox-series-x.png" class="card-img-top" alt="Xbox Series X">
                             <div class="card-body">
@@ -35,6 +35,7 @@
                                         @if (product.IsInStock)
                                         {
                                             <button type="submit" class="btn btn-primary my-1">Add to basket</button>
+                                            
                                         }
                                         else
                                         {

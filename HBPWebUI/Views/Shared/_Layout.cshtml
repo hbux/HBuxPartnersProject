@@ -1,6 +1,6 @@
 ﻿@inject HBPUI.Library.Endpoint.ICategoryEndpoint categoryEndpoint
 @{
-    List<HBPUI.Library.Models.CategoryModel> categories = await categoryEndpoint.GetAll();
+    var categories = await categoryEndpoint.GetAllCategories();
 }
 
 <!DOCTYPE html>
@@ -8,7 +8,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>HBux &amp; Partners @ViewData["Title"]</title>
+    <title>@ViewData["Title"] - HBux &amp; Partners</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/main.css" />
     @RenderSection("Styles", required: false)
@@ -54,12 +54,12 @@
                             Shop
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                @foreach (HBPUI.Library.Models.CategoryModel category in categories)
+                                @foreach (var category in categories)
                                 {
-                                    <li><a class="dropdown-item" href="#">@category.Name</a></li>
+                                    <li><a class="dropdown-item" asp-area="" asp-controller="Category" asp-action="Index" asp-route-id="@category.Title">@category.Title</a></li>
                                 }
                                 <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" asp-area="" asp-controller="Products" asp-action="ViewAll">View all</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="Product" asp-action="ViewAll">View All</a></li>
                             </ul>
                         </li>
                         <li class="nav-item">

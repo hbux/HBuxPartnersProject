@@ -20,9 +20,16 @@ namespace HBPApi.Controllers
         }
 
         [HttpGet]
-        public async Task<List<ProductModel>> GetAll()
+        public async Task<List<ProductModel>> GetAllProducts()
         {
             return await _productData.GetAllProducts();
+        }
+
+        [HttpGet]
+        [Route("Category")]
+        public async Task<List<CategoryModel>> GetAllCategories()
+        {
+            return await _productData.GetAllCategories();
         }
     }
 }

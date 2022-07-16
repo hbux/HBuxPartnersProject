@@ -2,7 +2,7 @@
 
 namespace HBPWebUI.Models
 {
-    public class ProductsViewModel
+    public class ProductViewModel
     {
         private List<ProductModel> _products;
 

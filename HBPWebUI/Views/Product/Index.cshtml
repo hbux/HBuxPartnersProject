@@ -1,14 +1,13 @@
-﻿@model ItemViewModel
+﻿@model IndexViewModel
 @{
-    ViewData["Title"] = $"- { Model.Product.Name }";
+    ViewData["Title"] = Model.Product.Name;
 }
 
 <div class="container py-4">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item"><a href="#">Products</a></li>
-            <li class="breadcrumb-item"><a href="#">Item</a></li>
+            <li class="breadcrumb-item"><a href="#">Product</a></li>
             <li class="breadcrumb-item active" aria-current="page">@Model.Product.Id</li>
         </ol>
     </nav>

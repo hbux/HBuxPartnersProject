@@ -3,6 +3,6 @@ AS
 BEGIN
 	SET NOCOUNT ON;
 
-	SELECT [Id], [Name] 
+	SELECT [Id], [Title], [ParentId]
 	FROM dbo.Category
 END

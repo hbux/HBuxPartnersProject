@@ -6,6 +6,6 @@ namespace HBPUI.Library.Endpoint
 {
     public interface IProductEndpoint
     {
-        Task<List<ProductModel>> GetAll();
+        Task<List<ProductModel>> GetAllProducts();
     }
 }

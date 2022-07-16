@@ -18,7 +18,6 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddTransient<IProductData, ProductData>();
-builder.Services.AddTransient<ICategoryData, CategoryData>();
 builder.Services.AddTransient<ISqlDataAccess, SqlDataAccess>();
 
 builder.Services.AddSwaggerGen(setup =>
