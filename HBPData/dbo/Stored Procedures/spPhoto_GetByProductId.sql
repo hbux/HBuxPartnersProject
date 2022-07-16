@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[spPhoto_GetById]
+﻿CREATE PROCEDURE [dbo].[spPhoto_GetByProductId]
 	@productId INT
 AS
 BEGIN

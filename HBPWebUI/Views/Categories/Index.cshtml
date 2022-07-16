@@ -1,6 +1,6 @@
-﻿@model ProductViewModel
+﻿@model CategoryViewModel
 @{
-    ViewData["Title"] = "View All";
+    ViewData["Title"] = $"View All { Model.CategoryName }";
 }
 
 <div class="container py-4">
@@ -8,21 +8,21 @@
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="#">Home</a></li>
             <li class="breadcrumb-item"><a href="#">Product</a></li>
-            <li class="breadcrumb-item active" aria-current="page">View All</li>
+            <li class="breadcrumb-item active" aria-current="page">@Model.CategoryName</li>
         </ol>
     </nav>
 </div>
 
 <div class="container">
     <div class="text-center">
-        <h1 class="h4 mb-3 fw-normal">View All (@Model.Products.Count)</h1>
+        <h1 class="h4 mb-3 fw-normal">@Model.CategoryName (@Model.Products.Count)</h1>
     </div>
     <form>
         <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-2 g-lg-3">
             @foreach (HBPUI.Library.Models.ProductModel product in Model.Products)
             {
                 <div class="col">
-                    <a class="text-decoration-none" asp-area="" asp-controller="Product" asp-action="Index" asp-route-id="@product.Id">
+                    <a class="text-decoration-none" asp-area="" asp-controller="Product" asp-action="Index" asp-route-name="@product.Id">
                         <div class="card" style="width: unset; height: 100%" >
                             <img src="~/images/@product.Thumbnail.GetFullUri" class="card-img-top" alt="Xbox Series X">
                             <div class="card-body">

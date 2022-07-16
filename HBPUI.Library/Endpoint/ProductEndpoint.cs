@@ -17,13 +17,28 @@ namespace HBPUI.Library.Endpoint
             _api = api;
         }
 
-        public async Task<List<ProductModel>> GetAllProducts()
+        public async Task<List<ProductModel>> GetAllProducts(string categoryName)
         {
-            using (HttpResponseMessage response = await _api.Client.GetAsync("api/product"))
+            using (HttpResponseMessage response = await _api.Client.GetAsync($"api/products/bycategory/{ categoryName }"))
             {
                 if (response.IsSuccessStatusCode)
                 {
                     return await response.Content.ReadAsAsync<List<ProductModel>>();
+                }
+                else
+                {
+                    throw new Exception(response.ReasonPhrase);
+                }
+            }
+        }
+
+        public async Task<ProductModel> GetProduct(int id)
+        {
+            using (HttpResponseMessage response = await _api.Client.GetAsync($"api/products/product/byid/{ id }"))
+            {
+                if (response.IsSuccessStatusCode)
+                {
+                    return await response.Content.ReadAsAsync<ProductModel>();
                 }
                 else
                 {

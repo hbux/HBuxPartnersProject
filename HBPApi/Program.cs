@@ -61,7 +61,12 @@ app.UseSwaggerUI(x =>
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Home}/{action=Index}/{id}");
+
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Home}/{action=Index}/{name}");
+
 app.MapRazorPages();
 
 app.Run();

@@ -63,12 +63,13 @@
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\Product.sql" />
-    <Build Include="dbo\Stored Procedures\spProduct_GetAll.sql" />
+    <Build Include="dbo\Stored Procedures\spProduct_GetAllByCategoryName.sql" />
     <Build Include="dbo\Tables\Category.sql" />
     <Build Include="dbo\Tables\ProductCategory.sql" />
     <Build Include="dbo\Stored Procedures\spCategory_GetAll.sql" />
     <Build Include="dbo\Tables\Photo.sql" />
-    <Build Include="dbo\Stored Procedures\spPhoto_GetById.sql" />
+    <Build Include="dbo\Stored Procedures\spPhoto_GetByProductId.sql" />
+    <Build Include="dbo\Stored Procedures\spProduct_GetByProductId.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="PublishLocations\HBPData.publish.xml" />

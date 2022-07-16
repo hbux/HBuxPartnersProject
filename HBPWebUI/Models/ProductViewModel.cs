@@ -4,17 +4,17 @@ namespace HBPWebUI.Models
 {
     public class ProductViewModel
     {
-        private List<ProductModel> _products;
+        private ProductModel _product;
 
-        public List<ProductModel> Products
+        public ProductModel Product
         {
             get
             {
-                return _products;
+                return _product;
             }
             set
             {
-                _products = value;
+                _product = value;
             }
         }
     }
