@@ -15,6 +15,7 @@ namespace HBPUI.Library.Models
         public int QuantityInStock { get; set; }
         public DateTime CreateDate { get; set; }
         public DateTime ModifiedDate { get; set; }
+        public List<PhotoModel> Photos { get; set; } = new List<PhotoModel>();
         public bool IsInStock
         {
             get
@@ -25,6 +26,13 @@ namespace HBPUI.Library.Models
                 }
 
                 return false;
+            }
+        }
+        public PhotoModel Thumbnail
+        {
+            get
+            {
+                return Photos[0];
             }
         }
     }

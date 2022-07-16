@@ -1,0 +1,9 @@
+﻿CREATE TABLE [dbo].[Photo]
+(
+	[Id] INT NOT NULL PRIMARY KEY IDENTITY(100, 1),
+	[ProductId] INT NOT NULL,
+	[BlobName] NVARCHAR(128) NOT NULL,
+	[BlobContainerUri] NVARCHAR(128) NOT NULL,
+	[BlobType] NVARCHAR(10) NOT NULL,
+    CONSTRAINT [FK_Photo_ToProduct] FOREIGN KEY (ProductId) REFERENCES [Product]([Id])
+)

@@ -1,5 +1,6 @@
 ﻿using HBPApi.Library.DataAccess;
 using HBPApi.Library.Models;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -10,8 +11,8 @@ namespace HBPApi.Library.Data
 {
     public class ProductData : IProductData
     {
-        private ILogger<ProductData> _logger;
-        private ISqlDataAccess _dataAccess;
+        private readonly ILogger<ProductData> _logger;
+        private readonly ISqlDataAccess _dataAccess;
 
         public ProductData(ILogger<ProductData> logger, ISqlDataAccess dataAccess)
         {
@@ -37,6 +38,22 @@ namespace HBPApi.Library.Data
                 _logger.LogWarning("Unable to load products with SP: {StoredProcedure} with CNN: {ConnectionStringName} at {Time}",
                     storedProcedure, connectionStringName, DateTime.UtcNow);
                 throw new NullReferenceException("Unable to load products.");
+            }
+
+            storedProcedure = "dbo.spPhoto_GetById";
+            foreach (ProductModel product in products)
+            {
+                List<PhotoModel> productPhotos = await
+                    _dataAccess.LoadData<PhotoModel, dynamic>(storedProcedure, new { ProductId = product.Id }, connectionStringName);
+            
+                if (productPhotos == null)
+                {
+                    _logger.LogWarning("Unable to load product photos by PID: {ProductId} with SP: {StoredProcedure} with CNN: {ConnectionStringName} at {Time}",
+                    product.Id ,storedProcedure, connectionStringName, DateTime.UtcNow);
+                    continue;
+                }
+
+                product.Photos = productPhotos;
             }
 
             return products;
