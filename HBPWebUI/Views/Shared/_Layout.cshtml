@@ -51,22 +51,139 @@
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Shop
+                            Sale &amp; Offers
                             </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                @foreach (var category in categories)
-                                {
-                                    <li><a class="dropdown-item" asp-area="" asp-controller="Category" asp-action="Index" asp-route-id="@category.Title">@category.Title</a></li>
-                                }
-                                <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" asp-area="" asp-controller="Product" asp-action="ViewAll">View All</a></li>
-                            </ul>
+                            <ul class="dropdown-menu multi-column columns-3" aria-labelledby="navbarDropdown">
+		                        <div class="row">
+			                        <div class="col-sm-4">
+				                        <ul class="multi-column-dropdown">
+                                            <li><h6 class="dropdown-header">Dropdown header</h6></li>
+					                        <li><a class="dropdown-item" href="#">Action</a></li>
+					                        <li><a class="dropdown-item" href="#">Another action</a></li>
+					                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+				                        </ul>
+			                        </div>
+			                        <div class="col-sm-4">
+				                        <ul class="multi-column-dropdown">
+					                        <li><h6 class="dropdown-header">Dropdown header</h6></li>
+					                        <li><a class="dropdown-item" href="#">Action</a></li>
+					                        <li><a class="dropdown-item" href="#">Another action</a></li>
+					                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+				                        </ul>
+			                        </div>
+			                        <div class="col-sm-4">
+				                        <ul class="multi-column-dropdown">
+					                        <li><h6 class="dropdown-header">Dropdown header</h6></li>
+					                        <li><a class="dropdown-item" href="#">Action</a></li>
+					                        <li><a class="dropdown-item" href="#">Another action</a></li>
+					                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+				                        </ul>
+			                        </div>
+		                        </div>
+	                        </ul>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Subscriptions</a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Home &amp; Garden
+                            </a>
+                            <ul class="dropdown-menu multi-column columns-3" aria-labelledby="navbarDropdown">
+		                        <div class="row">
+			                        <div class="col-sm-4">
+				                        <ul class="multi-column-dropdown">
+                                            <li><h6 class="dropdown-header">Dropdown header</h6></li>
+					                        <li><a class="dropdown-item" href="#">Action</a></li>
+					                        <li><a class="dropdown-item" href="#">Another action</a></li>
+					                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+				                        </ul>
+			                        </div>
+			                        <div class="col-sm-4">
+				                        <ul class="multi-column-dropdown">
+					                        <li><h6 class="dropdown-header">Dropdown header</h6></li>
+					                        <li><a class="dropdown-item" href="#">Action</a></li>
+					                        <li><a class="dropdown-item" href="#">Another action</a></li>
+					                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+				                        </ul>
+			                        </div>
+			                        <div class="col-sm-4">
+				                        <ul class="multi-column-dropdown">
+					                        <li><h6 class="dropdown-header">Dropdown header</h6></li>
+					                        <li><a class="dropdown-item" href="#">Action</a></li>
+					                        <li><a class="dropdown-item" href="#">Another action</a></li>
+					                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+				                        </ul>
+			                        </div>
+		                        </div>
+	                        </ul>
                         </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Furniture &amp; Lights
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end multi-column columns-3" aria-labelledby="navbarDropdown">
+		                        <div class="row">
+			                        <div class="col-sm-4">
+				                        <ul class="multi-column-dropdown">
+                                            <li><h6 class="dropdown-header">Dropdown header</h6></li>
+					                        <li><a class="dropdown-item" href="#">Action</a></li>
+					                        <li><a class="dropdown-item" href="#">Another action</a></li>
+					                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+				                        </ul>
+			                        </div>
+			                        <div class="col-sm-4">
+				                        <ul class="multi-column-dropdown">
+					                        <li><h6 class="dropdown-header">Dropdown header</h6></li>
+					                        <li><a class="dropdown-item" href="#">Action</a></li>
+					                        <li><a class="dropdown-item" href="#">Another action</a></li>
+					                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+				                        </ul>
+			                        </div>
+			                        <div class="col-sm-4">
+				                        <ul class="multi-column-dropdown">
+					                        <li><h6 class="dropdown-header">Dropdown header</h6></li>
+					                        <li><a class="dropdown-item" href="#">Action</a></li>
+					                        <li><a class="dropdown-item" href="#">Another action</a></li>
+					                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+				                        </ul>
+			                        </div>
+		                        </div>
+	                        </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Electricals
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end multi-column columns-3" aria-labelledby="navbarDropdown">
+		                        <div class="row">
+			                        <div class="col-sm-4">
+				                        <ul class="multi-column-dropdown">
+                                            <li><h6 class="dropdown-header">Dropdown header</h6></li>
+					                        <li><a class="dropdown-item" href="#">Action</a></li>
+					                        <li><a class="dropdown-item" href="#">Another action</a></li>
+					                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+				                        </ul>
+			                        </div>
+			                        <div class="col-sm-4">
+				                        <ul class="multi-column-dropdown">
+					                        <li><h6 class="dropdown-header">Dropdown header</h6></li>
+					                        <li><a class="dropdown-item" href="#">Action</a></li>
+					                        <li><a class="dropdown-item" href="#">Another action</a></li>
+					                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+				                        </ul>
+			                        </div>
+			                        <div class="col-sm-4">
+				                        <ul class="multi-column-dropdown">
+					                        <li><h6 class="dropdown-header">Dropdown header</h6></li>
+					                        <li><a class="dropdown-item" href="#">Action</a></li>
+					                        <li><a class="dropdown-item" href="#">Another action</a></li>
+					                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+				                        </ul>
+			                        </div>
+		                        </div>
+	                        </ul>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
                     </ul>
-                    <div class="text-end">
+                    <div class="text-sm-start text-lg-end">
                         <a class="btn btn-outline-primary me-2" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
                         <a class="btn btn-primary">Register</a>
                         @*<ul class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -74,7 +191,7 @@
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Account
                                 </a>
-                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                     <li><a class="dropdown-item" href="#">Orders</a></li>
                                     <li><a class="dropdown-item" href="#">Subscriptions</a></li>
                                     <li><a class="dropdown-item" href="#">Profile</a></li>
