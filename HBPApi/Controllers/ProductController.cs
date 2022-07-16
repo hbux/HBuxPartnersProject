@@ -1,4 +1,5 @@
 ﻿using HBPApi.Library.Data;
+using HBPApi.Library.Helpers;
 using HBPApi.Library.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -12,11 +13,14 @@ namespace HBPApi.Controllers
     {
         private readonly ILogger<ProductController> _logger;
         private readonly IProductData _productData;
+        private readonly ICategoryHelper _categoryHelper;
 
-        public ProductController(ILogger<ProductController> logger, IProductData productData)
+        public ProductController(ILogger<ProductController> logger, IProductData productData, 
+            ICategoryHelper categoryHelper)
         {
             _logger = logger;
             _productData = productData;
+            _categoryHelper = categoryHelper;
         }
 
         [HttpGet]
@@ -27,9 +31,11 @@ namespace HBPApi.Controllers
 
         [HttpGet]
         [Route("Category")]
-        public async Task<List<CategoryModel>> GetAllCategories()
+        public async Task<List<NestedCategoryModel>> GetAllCategories()
         {
-            return await _productData.GetAllCategories();
+            List<CategoryModel> allCategories = await _productData.GetAllCategories();
+
+            return _categoryHelper.CreateNestedCategories(allCategories);
         }
     }
 }

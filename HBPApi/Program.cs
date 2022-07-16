@@ -1,6 +1,7 @@
 using HBPApi.Data;
 using HBPApi.Library.Data;
 using HBPApi.Library.DataAccess;
+using HBPApi.Library.Helpers;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
@@ -19,6 +20,7 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddTransient<IProductData, ProductData>();
 builder.Services.AddTransient<ISqlDataAccess, SqlDataAccess>();
+builder.Services.AddTransient<ICategoryHelper, CategoryHelper>();
 
 builder.Services.AddSwaggerGen(setup =>
 {

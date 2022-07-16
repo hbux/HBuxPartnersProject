@@ -17,13 +17,13 @@ namespace HBPUI.Library.Endpoint
             _api = api;
         }
 
-        public async Task<List<CategoryModel>> GetAllCategories()
+        public async Task<List<NestedCategoryModel>> GetAllCategories()
         {
             using (HttpResponseMessage response = await _api.Client.GetAsync("api/product/category"))
             {
                 if (response.IsSuccessStatusCode)
                 {
-                    return await response.Content.ReadAsAsync<List<CategoryModel>>();
+                    return await response.Content.ReadAsAsync<List<NestedCategoryModel>>();
                 }
                 else
                 {

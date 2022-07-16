@@ -2,5 +2,6 @@
 (
 	[Id] INT NOT NULL PRIMARY KEY IDENTITY(100, 1),
 	[Title] NVARCHAR(50) NOT NULL,
-	[ParentId] INT NULL
+	[ParentId] INT NULL,
+	[Level] INT NOT NULL
 )
