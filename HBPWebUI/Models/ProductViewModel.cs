@@ -1,21 +1,17 @@
 ﻿using HBPUI.Library.Models;
+using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 
 namespace HBPWebUI.Models
 {
     public class ProductViewModel
     {
-        private ProductModel _product;
+        [BindProperty]
+        public ProductModel Product { get; set; }
 
-        public ProductModel Product
-        {
-            get
-            {
-                return _product;
-            }
-            set
-            {
-                _product = value;
-            }
-        }
+        [BindProperty]
+        [Required]
+        [Range(1, 1000)]
+        public int Quantity { get; set; } = 1;
     }
 }

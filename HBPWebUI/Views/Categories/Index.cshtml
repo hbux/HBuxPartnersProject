@@ -3,20 +3,22 @@
     ViewData["Title"] = $"View All { Model.CategoryName }";
 }
 
-<div class="container py-4">
-    <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item"><a href="#">Product</a></li>
-            <li class="breadcrumb-item active" aria-current="page">@Model.CategoryName</li>
-        </ol>
-    </nav>
-</div>
-
 <div class="container">
     <div class="text-center">
         <h1 class="h4 mb-3 fw-normal">@Model.CategoryName (@Model.Products.Count)</h1>
-    </div>
+    </div> 
+    @if (Model.ShowNoProductsFound)
+    {
+        <div class="alert alert-primary" role="alert">
+            <div class="d-flex align-items-center mb-3">
+                <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Info:"><use xlink:href="#info-fill"/></svg>
+                <h4 class="alert-heading m-0">No Products found</h4>
+            </div>
+            <p>Sorry, we couldn't find any results for @Model.CategoryName</p>
+            <hr>
+            <p class="mb-0">This category might be temporarily out of stock. Try looking for alternative products within the departments.</p>
+        </div>
+    }
     <form>
         <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-2 g-lg-3">
             @foreach (HBPUI.Library.Models.ProductModel product in Model.Products)
@@ -51,3 +53,7 @@
         </div>
     </form>
 </div>
+
+@section Breadcrumb {
+    <li class="breadcrumb-item active" aria-current="page">@Model.CategoryName</li>
+}

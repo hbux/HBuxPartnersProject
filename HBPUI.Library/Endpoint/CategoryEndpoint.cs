@@ -17,6 +17,11 @@ namespace HBPUI.Library.Endpoint
             _api = api;
         }
 
+        /// <summary>
+        /// Reads all categories received from the request to the API.
+        /// </summary>
+        /// <returns>A list of ordered categories</returns>
+        /// <exception cref="Exception"></exception>
         public async Task<List<NestedCategoryModel>> GetAllCategories()
         {
             using (HttpResponseMessage response = await _api.Client.GetAsync("api/categories/getall"))

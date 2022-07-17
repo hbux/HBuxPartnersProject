@@ -1,4 +1,6 @@
-﻿using HBPWebUI.Models;
+﻿using HBPUI.Library.Endpoint;
+using HBPUI.Library.Models;
+using HBPWebUI.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -7,10 +9,12 @@ namespace HBPWebUI.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IProductEndpoint _productEndpoint;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, IProductEndpoint productEndpoint)
         {
             _logger = logger;
+            _productEndpoint = productEndpoint;
         }
 
         public IActionResult Index()
@@ -26,12 +30,6 @@ namespace HBPWebUI.Controllers
         public IActionResult Checkout()
         {
             return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
 }

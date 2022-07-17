@@ -8,6 +8,11 @@ namespace HBPApi.Library.Helpers
 {
     public class CategoryHelper : ICategoryHelper
     {
+        /// <summary>
+        /// Creates an ordered list of categories. 
+        /// </summary>
+        /// <param name="ulCategories">An unordered list of all categories</param>
+        /// <returns>A list of ordered categories</returns>
         public List<NestedCategoryModel> CreateNestedCategories(List<CategoryModel> ulCategories)
         {
             List<NestedCategoryModel> nestedCategories = new List<NestedCategoryModel>();
@@ -23,7 +28,9 @@ namespace HBPApi.Library.Helpers
                 
                 foreach (CategoryModel basic in basics)
                 {
-                    List<CategoryModel> subordinates = ulCategories.FindAll(x => x.Level == 2).Where(x => x.ParentId == basic.Id).ToList();
+                    List<CategoryModel> subordinates = ulCategories
+                        .FindAll(x => x.Level == 2)
+                        .Where(x => x.ParentId == basic.Id).ToList();
 
                     nestedCategory.Subordinates.Add(basic.Title, subordinates);
                 }

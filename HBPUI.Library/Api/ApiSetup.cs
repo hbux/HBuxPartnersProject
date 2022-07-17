@@ -30,6 +30,9 @@ namespace HBPUI.Library.Api
             InitializeClient();
         }
 
+        /// <summary>
+        /// Initializes the connection with the api using configuration settings.
+        /// </summary>
         private void InitializeClient()
         {
             _client = new HttpClient();
@@ -39,13 +42,19 @@ namespace HBPUI.Library.Api
             _client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
-        public string GetApiUri(string uriName)
+        /// <summary>
+        /// Retrieves the API URI from configuration settings.
+        /// </summary>
+        /// <param name="apiUriName">The key name of the API URI in configuration settings</param>
+        /// <returns>The value retrieved from the key</returns>
+        /// <exception cref="InvalidOperationException"></exception>
+        public string GetApiUri(string apiUriName)
         {
-            string apiUri = _config.GetValue<string>(uriName);
+            string apiUri = _config.GetValue<string>(apiUriName);
 
             if (string.IsNullOrEmpty(apiUri) == true)
             {
-                _logger.LogWarning("Failed to retrieve API URI {Name} from configuration settings at {Time}", uriName, DateTime.UtcNow);
+                _logger.LogWarning("Failed to retrieve API URI {Name} from configuration settings at {Time}", apiUriName, DateTime.UtcNow);
                 throw new InvalidOperationException($"The configuration setting for the API could not be found.");
             }
 

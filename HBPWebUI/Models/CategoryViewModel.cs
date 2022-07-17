@@ -4,31 +4,8 @@ namespace HBPWebUI.Models
 {
     public class CategoryViewModel
     {
-        private string _categoryName;
-        private List<ProductModel> _products;
-
-        public string CategoryName
-        {
-            get
-            {
-                return _categoryName;
-            }
-            set
-            {
-                _categoryName = value;
-            }
-        }
-
-        public List<ProductModel> Products
-        {
-            get
-            {
-                return _products;
-            }
-            set
-            {
-                _products = value;
-            }
-        }
+        public string CategoryName { get; set; }
+        public List<ProductModel> Products { get; set; }
+        public bool ShowNoProductsFound => Products.Count == 0;
     }
 }

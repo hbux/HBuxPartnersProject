@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace HBPUI.Library.Models
@@ -32,7 +33,15 @@ namespace HBPUI.Library.Models
         {
             get
             {
-                return Photos[0];
+                return Photos.FirstOrDefault();
+            }
+        }
+
+        public string ShortName
+        {
+            get
+            {
+                return $"{ Name.Substring(0, 15).Trim() }...";
             }
         }
     }

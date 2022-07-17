@@ -112,6 +112,19 @@
             </div>
         </nav>
     </header>
+    @if (ViewContext.RouteData.Values["controller"].ToString() != "Home" &&
+            ViewContext.RouteData.Values["controller"].ToString() != "Account")
+    {
+        <div class="container py-4">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li class="breadcrumb-item active">@ViewContext.RouteData.Values["controller"].ToString()</li>
+                    @RenderSection("Breadcrumb", required: false)
+                </ol>
+            </nav>
+        </div>
+    }
     @RenderBody()
     <div class="container">
         <footer class="py-5">

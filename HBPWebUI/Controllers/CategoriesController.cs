@@ -2,6 +2,7 @@
 using HBPUI.Library.Models;
 using HBPWebUI.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics;
 
 namespace HBPWebUI.Controllers
 {
@@ -16,15 +17,27 @@ namespace HBPWebUI.Controllers
             _productEndpoint = productEndpoint;
         }
 
+        [HttpGet]
         public async Task<IActionResult> Index(string name)
         {
-            List<ProductModel> products = await _productEndpoint.GetAllProducts(name);
-
-            return View( new CategoryViewModel()
+            try
             {
-                CategoryName = name,
-                Products = products
-            });
+                List<ProductModel> products = await _productEndpoint.GetAllProducts(name);
+
+                return View(new CategoryViewModel()
+                {
+                    CategoryName = name,
+                    Products = products,
+                });
+            }
+            catch (Exception ex)
+            {
+                return View(new ErrorViewModel
+                {
+                    Message = ex.Message,
+                    RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier
+                });
+            }
         }
     }
 }
