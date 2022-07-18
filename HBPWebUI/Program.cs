@@ -32,4 +32,8 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{name?}");
 
+app.MapControllerRoute(
+    name: "browse",
+    pattern: "{controller=Browse}/{action=Index}/{category?}/{subcategory?}/{type?}");
+
 app.Run();

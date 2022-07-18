@@ -64,7 +64,16 @@
                                                     <li><h6 class="dropdown-header fw-bold text-black">@basic.Key</h6></li>
                                                     @foreach (var subCategory in basic.Value)
                                                     {
-                                                        <li><a class="dropdown-item" asp-area="" asp-controller="Categories" asp-action="Index" asp-route-name="@subCategory.Title">@subCategory.Title</a></li>
+                                                        <li>
+                                                            <a class="dropdown-item" 
+                                                                asp-area="" 
+                                                                asp-controller="Browse" 
+                                                                asp-action="Categories" 
+                                                                asp-route-category="@category.Superordinate.Title" 
+                                                                asp-route-subcategory="@basic.Key"  
+                                                                asp-route-type="@subCategory.Title">@subCategory.Title
+                                                            </a>
+                                                        </li>
                                                     }
 				                                </ul>
 			                                </div>

@@ -1,13 +1,13 @@
-﻿@model CategoryViewModel
+﻿@model List<HBPUI.Library.Models.ProductModel>
 @{
-    ViewData["Title"] = $"View All { Model.CategoryName }";
+    ViewData["Title"] = $"View All Product for a category";
 }
 
 <div class="container">
     <div class="text-center">
-        <h1 class="h4 mb-3 fw-normal">@Model.CategoryName (@Model.Products.Count)</h1>
+        <h1 class="h4 mb-3 fw-normal">Category Name (@Model.Count)</h1>
     </div> 
-    @if (Model.ShowNoProductsFound)
+@*    @if (Model.ShowNoProductsFound)
     {
         <div class="alert alert-primary" role="alert">
             <div class="d-flex align-items-center mb-3">
@@ -18,13 +18,13 @@
             <hr>
             <p class="mb-0">This category might be temporarily out of stock. Try looking for alternative products within the departments.</p>
         </div>
-    }
+    }*@
     <form>
         <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-2 g-lg-3">
-            @foreach (HBPUI.Library.Models.ProductModel product in Model.Products)
+            @foreach (HBPUI.Library.Models.ProductModel product in Model)
             {
                 <div class="col">
-                    <a class="text-decoration-none" asp-area="" asp-controller="Product" asp-action="Index" asp-route-name="@product.Id">
+                    <a class="text-decoration-none" asp-area="" asp-controller="Browse" asp-action="Product" asp-route-name="@product.Id">
                         <div class="card" style="width: unset; height: 100%" >
                             <img src="~/images/@product.Thumbnail.GetFullUri" class="card-img-top" alt="Xbox Series X">
                             <div class="card-body">
@@ -55,5 +55,5 @@
 </div>
 
 @section Breadcrumb {
-    <li class="breadcrumb-item active" aria-current="page">@Model.CategoryName</li>
+    <li class="breadcrumb-item active" aria-current="page">Category Name</li>
 }

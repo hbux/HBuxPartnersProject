@@ -1,29 +1,29 @@
-﻿@model ProductViewModel
+﻿@model HBPUI.Library.Models.ProductModel
 @{
-    ViewData["Title"] = @Model.Product.Name;
+    ViewData["Title"] = @Model.Name;
 }
 
 <form asp-action="AddToBasket">
-    <input type="hidden" asp-for="@Model.Product.Id" />
+    <input type="hidden" asp-for="@Model.Id" />
     <div class="container pb-5 border-bottom">
         <div class="row row-cols-1 row-cols-md-2">
             <div class="col">
                 <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-indicators">
                         <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                        @for (int i = 1; i < Model.Product.Photos.Count; i++)
+                        @for (int i = 1; i < Model.Photos.Count; i++)
                         {
                             <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="@i" aria-label="Slide @i"></button> 
                         }
                     </div>
                     <div class="carousel-inner">
                         <div class="carousel-item active">
-                            <img src="~/images/@Model.Product.Thumbnail.GetFullUri" class="d-block w-100" alt="...">
+                            <img src="~/images/@Model.Thumbnail.GetFullUri" class="d-block w-100" alt="...">
                         </div>
-                        @for (int i = 1; i < Model.Product.Photos.Count; i++)
+                        @for (int i = 1; i < Model.Photos.Count; i++)
                         {
                             <div class="carousel-item">
-                                <img src="~/images/@Model.Product.Photos[i].GetFullUri" class="d-block w-100" alt="...">
+                                <img src="~/images/@Model.Photos[i].GetFullUri" class="d-block w-100" alt="...">
                             </div>
                         }
                     </div>
@@ -38,9 +38,9 @@
                 </div>
             </div>
             <div class="col">
-                <h1 class="h4 mb-3 fw-normal">@Model.Product.Name</h1>
+                <h1 class="h4 mb-3 fw-normal">@Model.Name</h1>
                 <div class="py-1">
-                    <h1 class="h3 mb-3 fw-bold">@Model.Product.RetailPrice.ToString("C2")</h1>
+                    <h1 class="h3 mb-3 fw-bold">@Model.RetailPrice.ToString("C2")</h1>
                 </div>
                 <div class="py-3 d-flex justify-content-between">
                     <a class="custom-link-to-accordion fw-normal text-black" href="#accordion">View delivery options</a>
@@ -51,13 +51,12 @@
                         <h1 class="h5 fw-bold m-0">Quantity:</h1>
                     </div>
                     <div class="col-3">
-                        <input class="form-control" asp-for="@Model.Quantity" type="number" aria-label="default input example">
-                        <span asp-validation-for="@Model.Quantity" class="text-danger"></span>
+                        <input class="form-control" value="1" type="number" aria-label="default input example">
                     </div>
                 </div>
                 <div class="bg-light p-2 rounded text-center">
-                    <p class="fw-bold m-0">@Model.Product.RetailPrice.ToString("C2")</p>
-                    @if (Model.Product.IsInStock)
+                    <p class="fw-bold m-0">@Model.RetailPrice.ToString("C2")</p>
+                    @if (Model.IsInStock)
                     {
                         <p class="fw-normal m-0">Currently in stock online</p>
                     }
@@ -66,7 +65,7 @@
                         <p class="fw-normal m-0">Out of stock online</p>
                     }
                 </div>
-                @if (Model.Product.IsInStock)
+                @if (Model.IsInStock)
                 {
                     <div class="d-grid my-2">
                         <button type="submit" class="btn btn-primary btn-lg">Add to basket</button>
@@ -81,16 +80,16 @@
                         </div>
                     </div>
                 }
-                @if (TempData["StatusMessage"] != null)
+@*                @if (TempData["StatusMessage"] != null)
                 {
-                    <div class="alert alert-success alert-dismissible fade show d-flex align-items-center" role="alert">
-                        <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
+                    <div class="alert alert-danger alert-dismissible fade show d-flex align-items-center" role="alert">
+                        <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         <div>
                         @TempData["StatusMessage"]
                         </div>
                     </div>
-                }
+                }*@
             </div>
         </div>
     </div>
@@ -104,8 +103,8 @@
                 </h2>
                 <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                     <div class="accordion-body">
-                    <strong>Product code: @Model.Product.Id</strong>
-                    <p class="fw-normal">@Model.Product.Description</p>
+                    <strong>Product code: @Model.Id</strong>
+                    <p class="fw-normal">@Model.Description</p>
                     </div>
                 </div>
             </div>
@@ -138,7 +137,7 @@
 </form>
 
 @section Breadcrumb {
-    <li class="breadcrumb-item active" aria-current="page">@Model.Product.Name</li>
+    <li class="breadcrumb-item active" aria-current="page">@Model.Name</li>
 }
 
 <script>

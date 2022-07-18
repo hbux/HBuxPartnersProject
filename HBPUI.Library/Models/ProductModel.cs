@@ -14,8 +14,6 @@ namespace HBPUI.Library.Models
         public float Weight { get; set; }
         public decimal RetailPrice { get; set; }
         public int QuantityInStock { get; set; }
-        public DateTime CreateDate { get; set; }
-        public DateTime ModifiedDate { get; set; }
         public List<PhotoModel> Photos { get; set; } = new List<PhotoModel>();
         public bool IsInStock
         {
@@ -41,7 +39,12 @@ namespace HBPUI.Library.Models
         {
             get
             {
-                return $"{ Name.Substring(0, 15).Trim() }...";
+                if (Name.Length > 15)
+                {
+                    return $"{Name.Substring(0, 15).Trim()}...";
+                }
+
+                return Name;
             }
         }
     }
