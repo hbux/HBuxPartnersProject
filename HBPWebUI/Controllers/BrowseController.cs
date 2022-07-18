@@ -25,13 +25,17 @@ namespace HBPWebUI.Controllers
             return View(allCategories);
         }
 
-        public async Task<IActionResult> Categories(string category, string subCategory, string type)
+        public async Task<IActionResult> Categories(string category, string subcategory, string type)
         {
-            if (string.IsNullOrEmpty(category) || string.IsNullOrEmpty(subCategory) || 
+            if (string.IsNullOrEmpty(category) || string.IsNullOrEmpty(subcategory) || 
                 string.IsNullOrEmpty(type))
             {
                 return View("Index");
             }
+
+            ViewData["Category"] = category;
+            ViewData["Subcategory"] = subcategory;
+            ViewData["Type"] = type;
 
             List<ProductModel> categoryProducts = await _productEndpoint.GetAllProducts(type);
 

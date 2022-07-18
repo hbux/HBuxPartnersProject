@@ -3,5 +3,83 @@
     ViewData["Title"] = "All Categories";
 }
 
-<h1>All Categories</h1>
-<p>You are viewing all categories with links to each category.</p>
+<div class="container">
+    <div class="d-flex row row-cols-1 row-cols-md-2">
+        <div class="col-md-3 flex-shrink-0 p-3 bg-white">
+            <a href="/" class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
+                <span class="fs-5 fw-semibold">All categories</span>
+            </a>
+            <ul class="list-unstyled ps-0">
+                @foreach (var category in Model)
+                {
+                    <li class="mb-1">
+                        <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="true">
+                            @category.Superordinate.Title
+                        </button>
+                        <div class="collapse show" id="home-collapse">
+                            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                                @foreach (var basic in category.Subordinates)
+                                {
+                                    @foreach (var subcategory in basic.Value)
+                                    {
+                                        <li>
+                                            <a 
+                                                asp-area="" 
+                                                asp-controller="Browse" 
+                                                asp-action="Categories" 
+                                                asp-route-category="@category.Superordinate.Title"
+                                                asp-route-subcategory="@basic.Key"
+                                                asp-route-type="@subcategory.Title"
+                                                class="link-dark rounded">@subcategory.Title
+                                            </a>
+                                        </li>
+                                    }
+                                }
+                            </ul>
+                        </div>
+                    </li>
+                }
+            </ul>
+        </div>
+        <div class="col-md-9">
+            <div class="p-5 mb-4 bg-light rounded-3">
+                <div class="container-fluid py-2">
+                    <h1 class="fw-bold">Custom jumbotron</h1>
+                    <p class="col-md-8">Using a series of utilities, you can create this jumbotron, just like the one in previous versions of Bootstrap. Check out the examples below for how you can remix and restyle it to your liking.</p>
+                    <button class="btn btn-primary" type="button">Example button</button>
+                </div>
+            </div>
+            <div class="row align-items-md-stretch">
+                <div class="col-md-6">
+                    <div class="h-100 p-5 text-white bg-dark rounded-3">
+                        <h2>Change the background</h2>
+                        <p>Swap the background-color utility and add a `.text-*` color utility to mix up the jumbotron look. Then, mix and match with additional component themes and more.</p>
+                        <button class="btn btn-outline-light" type="button">Example button</button>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="h-100 p-5 bg-light border rounded-3">
+                        <h2>Add borders</h2>
+                        <p>Or, keep it light and add a border for some added definition to the boundaries of your content. Be sure to look under the hood at the source HTML here as we've adjusted the alignment and sizing of both column's content for equal-height.</p>
+                        <button class="btn btn-outline-secondary" type="button">Example button</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/sidebars.css" />
+}
+
+<script>
+/* global bootstrap: false */
+    (function () {
+      'use strict'
+      var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+      tooltipTriggerList.forEach(function (tooltipTriggerEl) {
+        new bootstrap.Tooltip(tooltipTriggerEl)
+      })
+    })()
+</script>

@@ -1,24 +1,28 @@
 ﻿@model List<HBPUI.Library.Models.ProductModel>
 @{
-    ViewData["Title"] = $"View All Product for a category";
+    string categoryName = (string)ViewData["Category"];
+    string subcategoryName = (string)ViewData["subcategory"];
+    string typeName = (string)ViewData["Type"];
+
+    ViewData["Title"] = $"View All { typeName }";
 }
 
 <div class="container">
     <div class="text-center">
-        <h1 class="h4 mb-3 fw-normal">Category Name (@Model.Count)</h1>
+        <h1 class="h4 mb-3 fw-normal">@typeName (@Model.Count)</h1>
     </div> 
-@*    @if (Model.ShowNoProductsFound)
+    @if (Model.Count == 0)
     {
         <div class="alert alert-primary" role="alert">
             <div class="d-flex align-items-center mb-3">
                 <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Info:"><use xlink:href="#info-fill"/></svg>
                 <h4 class="alert-heading m-0">No Products found</h4>
             </div>
-            <p>Sorry, we couldn't find any results for @Model.CategoryName</p>
+            <p>Sorry, we couldn't find any results for @typeName</p>
             <hr>
             <p class="mb-0">This category might be temporarily out of stock. Try looking for alternative products within the departments.</p>
         </div>
-    }*@
+    }
     <form>
         <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-2 g-lg-3">
             @foreach (HBPUI.Library.Models.ProductModel product in Model)
@@ -55,5 +59,30 @@
 </div>
 
 @section Breadcrumb {
-    <li class="breadcrumb-item active" aria-current="page">Category Name</li>
+    <li class="breadcrumb-item active">
+        <a 
+            asp-area="" 
+            asp-controller="Browse" 
+            asp-action="Index">@categoryName
+        </a>
+    </li>
+    <li class="breadcrumb-item active">
+        <a 
+            asp-area="" 
+            asp-controller="Browse" 
+            asp-action="Categories" 
+            asp-route-category="@categoryName" 
+            asp-route-subcategory="@subcategoryName">@subcategoryName
+        </a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">
+        <a 
+            asp-area="" 
+            asp-controller="Browse" 
+            asp-action="Categories" 
+            asp-route-category="@categoryName" 
+            asp-route-subcategory="@subcategoryName" 
+            asp-route-type="@typeName">@typeName
+        </a>
+    </li>
 }
