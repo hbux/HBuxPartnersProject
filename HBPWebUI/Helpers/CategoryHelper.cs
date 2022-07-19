@@ -25,15 +25,18 @@ namespace HBPWebUI.Helpers
                 CategoriesViewModel nestedCategory = new CategoriesViewModel();
                 nestedCategory.Superordinate = superordinate;
 
-                List<CategoryModel> basics = ulCategories.FindAll(x => x.Level == 1);
+                List<CategoryModel> basics = ulCategories.FindAll(x => x.Level == 1).Where(x => x.ParentId == superordinate.Id).ToList();
                 
                 foreach (CategoryModel basic in basics)
                 {
-                    List<CategoryModel> subordinates = ulCategories
-                        .FindAll(x => x.Level == 2)
-                        .Where(x => x.ParentId == basic.Id).ToList();
+                    List<CategoryModel> subordintes = new List<CategoryModel>();
 
-                    nestedCategory.Subordinates.Add(basic.Title, subordinates);
+                    foreach (CategoryModel subcategory in ulCategories.Where(x => x.ParentId == basic.Id))
+                    {
+                        subordintes.Add(subcategory);
+                    }
+
+                    nestedCategory.Subordinates.Add(basic.Title, subordintes);
                 }
 
                 nestedCategories.Add(nestedCategory);

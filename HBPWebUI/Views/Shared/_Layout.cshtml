@@ -51,37 +51,68 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Browse" asp-action="Index">Browse</a></li>
-                        @foreach (var category in categories)
+                        @for (int i = 0; i < categories.Count; i++)
                         {
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                @category.Superordinate.Title
+                                @categories[i].Superordinate.Title
                                 </a>
-                                <ul class="dropdown-menu multi-column columns-3" aria-labelledby="navbarDropdown">
-		                            <div class="row">
-                                        @foreach (var basic in category.Subordinates)
-                                        {
-                                            <div class="col-sm-4">
-				                                <ul class="multi-column-dropdown">
-                                                    <li><h6 class="dropdown-header fw-bold text-black">@basic.Key</h6></li>
-                                                    @foreach (var subCategory in basic.Value)
-                                                    {
-                                                        <li>
-                                                            <a class="dropdown-item" 
-                                                                asp-area="" 
-                                                                asp-controller="Browse" 
-                                                                asp-action="Categories" 
-                                                                asp-route-category="@category.Superordinate.Title" 
-                                                                asp-route-subcategory="@basic.Key"  
-                                                                asp-route-type="@subCategory.Title">@subCategory.Title
-                                                            </a>
-                                                        </li>
-                                                    }
-				                                </ul>
-			                                </div>
-                                        }
-		                            </div>
-	                            </ul>
+                                @if (i == categories.Count - 1)
+                                {
+                                    <ul class="dropdown-menu dropdown-menu-end multi-column columns-3" aria-labelledby="navbarDropdown">
+		                                <div class="row">
+                                            @foreach (var basic in categories[i].Subordinates)
+                                            {
+                                                <div class="col-sm-4">
+				                                    <ul class="multi-column-dropdown">
+                                                        <li><h6 class="dropdown-header fw-bold text-black">@basic.Key</h6></li>
+                                                        @foreach (var subCategory in basic.Value)
+                                                        {
+                                                            <li>
+                                                                <a class="dropdown-item" 
+                                                                    asp-area="" 
+                                                                    asp-controller="Browse" 
+                                                                    asp-action="Categories" 
+                                                                    asp-route-category="@categories[i].Superordinate.Title" 
+                                                                    asp-route-subcategory="@basic.Key"  
+                                                                    asp-route-type="@subCategory.Title">@subCategory.Title
+                                                                </a>
+                                                            </li>
+                                                        }
+				                                    </ul>
+			                                    </div>
+                                            }
+		                                </div>
+	                                </ul>
+                                }
+                                else 
+                                {
+                                    <ul class="dropdown-menu multi-column columns-3" aria-labelledby="navbarDropdown">
+		                                <div class="row">
+                                            @foreach (var basic in categories[i].Subordinates)
+                                            {
+                                                <div class="col-sm-4">
+				                                    <ul class="multi-column-dropdown">
+                                                        <li><h6 class="dropdown-header fw-bold text-black">@basic.Key</h6></li>
+                                                        @foreach (var subCategory in basic.Value)
+                                                        {
+                                                            <li>
+                                                                <a class="dropdown-item" 
+                                                                    asp-area="" 
+                                                                    asp-controller="Browse" 
+                                                                    asp-action="Categories" 
+                                                                    asp-route-category="@categories[i].Superordinate.Title" 
+                                                                    asp-route-subcategory="@basic.Key"  
+                                                                    asp-route-type="@subCategory.Title">@subCategory.Title
+                                                                </a>
+                                                            </li>
+                                                        }
+				                                    </ul>
+			                                    </div>
+                                            }
+		                                </div>
+	                                </ul>
+                                }
                             </li>
                         }
                         <li><hr class="dropdown-divider"></li>

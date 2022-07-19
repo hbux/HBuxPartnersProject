@@ -24,6 +24,28 @@
                 <button class="w-100 btn btn-lg btn-primary" type="submit">Login</button>
                 <p class="mt-5 mb-3 text-muted">&copy; @DateTime.UtcNow.Year</p>
             </form>
+            <div class="py-3">
+                <p class="text-muted text-start my-1" style="font-size: 14px;">Don't want to manually register?</p>
+                <p>
+                    <button class="btn btn-primary w-100" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                    Reveal login credentials
+                    </button>
+                </p>
+                <div class="collapse" id="collapseExample">
+                    <div class="card text-start">
+                        <div class="card-body">
+                            <div class="form-floating mb-3">
+                                <input value="john.doe@@example.com" type="email" class="form-control" style="border-radius: 0.25rem;" id="floatingDeveloperInput">
+                                <label for="floatingDeveloperInput">Email address</label>
+                            </div>
+                            <div class="form-floating">
+                                <input value="JohnDoe12345!" class="form-control" id="floatingDeveloperPassword">
+                                <label for="floatingDeveloperPassword">Password</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </main>
     </div>
 </main>

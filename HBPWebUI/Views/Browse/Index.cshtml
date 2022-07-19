@@ -5,48 +5,91 @@
 
 <div class="container">
     <div class="d-flex row row-cols-1 row-cols-md-2">
-        <div class="col-md-3 flex-shrink-0 p-3 bg-white">
-            <a class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
+        <div class="col-md-3 flex-shrink-0 p-3 pt-0 bg-white vh-100 overflow-scroll">
+            <a class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom sticky-top" style="background-color: white;">
                 <span class="fs-5 fw-semibold">All categories</span>
             </a>
             <ul class="list-unstyled ps-0">
-                @foreach (var category in Model)
+                @for (int i = 0; i < Model.Count; i++)
                 {
-                    <li class="mb-1">
-                        <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="true">
-                            @category.Superordinate.Title
-                        </button>
-                        <div class="collapse show" id="home-collapse">
-                            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                                @foreach (var basic in category.Subordinates)
-                                {
-                                    @foreach (var subcategory in basic.Value)
+                    string category = $"{ Model[i].Superordinate.Title.Replace(' ', '-').Replace('&', '-') }-collapse";
+
+                    @if (i == 0)
+                    {
+                        <li class="mb-1">
+                            <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#@category" aria-expanded="true">
+                                @Model[i].Superordinate.Title
+                            </button>
+                            <div class="collapse show" id="@category">
+                                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                                    @foreach (var basic in Model[i].Subordinates)
                                     {
-                                        <li>
-                                            <a 
-                                                asp-area="" 
-                                                asp-controller="Browse" 
-                                                asp-action="Categories" 
-                                                asp-route-category="@category.Superordinate.Title"
-                                                asp-route-subcategory="@basic.Key"
-                                                asp-route-type="@subcategory.Title"
-                                                class="link-dark rounded">@subcategory.Title
-                                            </a>
-                                        </li>
+                                        @foreach (var subcategory in basic.Value)
+                                        {
+                                            <li>
+                                                <a 
+                                                    asp-area="" 
+                                                    asp-controller="Browse" 
+                                                    asp-action="Categories" 
+                                                    asp-route-category="@Model[i].Superordinate.Title"
+                                                    asp-route-subcategory="@basic.Key"
+                                                    asp-route-type="@subcategory.Title"
+                                                    class="link-dark rounded">@subcategory.Title
+                                                </a>
+                                            </li>
+                                        }
                                     }
-                                }
-                                <li>
-                                    <a 
-                                        asp-area="" 
-                                        asp-controller="Browse" 
-                                        asp-action="Category" 
-                                        asp-route-category="@category.Superordinate.Title"
-                                        class="link-dark rounded">View all
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
+                                    <li>
+                                        <a 
+                                            asp-area="" 
+                                            asp-controller="Browse" 
+                                            asp-action="Category" 
+                                            asp-route-category="@Model[i].Superordinate.Title"
+                                            class="link-dark rounded">View all
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="mb-1">
+                            <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#@category" aria-expanded="true">
+                                @Model[i].Superordinate.Title
+                            </button>
+                            <div class="collapse" id="@category">
+                                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                                    @foreach (var basic in Model[i].Subordinates)
+                                    {
+                                        @foreach (var subcategory in basic.Value)
+                                        {
+                                            <li>
+                                                <a 
+                                                    asp-area="" 
+                                                    asp-controller="Browse" 
+                                                    asp-action="Categories" 
+                                                    asp-route-category="@Model[i].Superordinate.Title"
+                                                    asp-route-subcategory="@basic.Key"
+                                                    asp-route-type="@subcategory.Title"
+                                                    class="link-dark rounded">@subcategory.Title
+                                                </a>
+                                            </li>
+                                        }
+                                    }
+                                    <li>
+                                        <a 
+                                            asp-area="" 
+                                            asp-controller="Browse" 
+                                            asp-action="Category" 
+                                            asp-route-category="@Model[i].Superordinate.Title"
+                                            class="link-dark rounded">View all
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    }
                 }
             </ul>
         </div>
