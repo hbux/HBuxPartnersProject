@@ -1,4 +1,5 @@
 ﻿using HBPUI.Library.Endpoint;
+using HBPUI.Library.Models;
 using HBPWebUI.Helpers;
 using HBPWebUI.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -26,7 +27,7 @@ namespace HBPWebUI.Controllers
 
         public async Task<IActionResult> Index()
         {
-            List<CategoryViewModel> allCategories = 
+            List<CategoriesViewModel> allCategories = 
                 _categoryHelper.CreateNestedCategories(await _categoryEndpoint.GetAllCategories());
 
             return View(allCategories);
@@ -56,11 +57,14 @@ namespace HBPWebUI.Controllers
             return View(categoryProducts);
         }
 
-        public IActionResult Category(string category)
+        public async Task<IActionResult> Category(string category)
         {
-            // Get specific category
+            Dictionary<string, List<CategoryModel>> subcategories = 
+                await _categoryEndpoint.GetCategory(category);
 
-            return View();
+            ViewData["Category"] = category;
+
+            return View(subcategories);
         }
 
         public async Task<IActionResult> Product(int name)

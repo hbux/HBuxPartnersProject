@@ -14,15 +14,15 @@ namespace HBPWebUI.Helpers
         /// </summary>
         /// <param name="ulCategories">An unordered list of all categories</param>
         /// <returns>A list of ordered categories</returns>
-        public List<CategoryViewModel> CreateNestedCategories(List<CategoryModel> ulCategories)
+        public List<CategoriesViewModel> CreateNestedCategories(List<CategoryModel> ulCategories)
         {
-            List<CategoryViewModel> nestedCategories = new List<CategoryViewModel>();
+            List<CategoriesViewModel> nestedCategories = new List<CategoriesViewModel>();
 
             List<CategoryModel> superordinates = ulCategories.FindAll(x => x.Level == 0);
 
             foreach (CategoryModel superordinate in superordinates)
             {
-                CategoryViewModel nestedCategory = new CategoryViewModel();
+                CategoriesViewModel nestedCategory = new CategoriesViewModel();
                 nestedCategory.Superordinate = superordinate;
 
                 List<CategoryModel> basics = ulCategories.FindAll(x => x.Level == 1);

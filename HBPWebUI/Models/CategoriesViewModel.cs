@@ -5,7 +5,7 @@ using System.Text;
 
 namespace HBPWebUI.Models
 {
-    public class CategoryViewModel
+    public class CategoriesViewModel
     {
         public CategoryModel Superordinate { get; set; }
         public Dictionary<string, List<CategoryModel>> Subordinates { get; set; }

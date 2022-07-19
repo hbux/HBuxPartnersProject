@@ -37,7 +37,7 @@
                                 <p class="fw-normal text-black d-block text-truncate text-wrap" style="max-width: 100%; height: 100px; max-height: 100px;">@display.Product.Name</p>
                                 <div class="align-text-bottom">
                                     <ul class="list-group list-group-flush border-bottom my-1">
-                                        <li class="list-group-item fw-bold">@display.Product.RetailPrice.ToString("C2")</li>
+                                        <li class="list-group-item fw-bold px-0">@display.Product.RetailPrice.ToString("C2")</li>
                                     </ul>
                                     <div class="d-grid my-2">
                                         @if (display.Product.IsInStock)
@@ -65,7 +65,8 @@
         <a 
             asp-area="" 
             asp-controller="Browse" 
-            asp-action="Category">@categoryName
+            asp-action="Category"
+            asp-route-category="@categoryName">@categoryName
         </a>
     </li>
     <li class="breadcrumb-item" aria-current="page">@subcategoryName</li>

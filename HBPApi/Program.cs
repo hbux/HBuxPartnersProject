@@ -17,6 +17,7 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
 
+builder.Services.AddTransient<ICategoryData, CategoryData>();
 builder.Services.AddTransient<IProductData, ProductData>();
 builder.Services.AddTransient<ISqlDataAccess, SqlDataAccess>();
 

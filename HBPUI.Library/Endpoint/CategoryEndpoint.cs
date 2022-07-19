@@ -36,5 +36,21 @@ namespace HBPUI.Library.Endpoint
                 }
             }
         }
+
+        public async Task<Dictionary<string, List<CategoryModel>>> GetCategory(string superordinateName)
+        {
+            using (HttpResponseMessage response = await 
+                _api.Client.GetAsync($"api/categories/byname/{ superordinateName }"))
+            {
+                if (response.IsSuccessStatusCode)
+                {
+                    return await response.Content.ReadAsAsync<Dictionary<string, List<CategoryModel>>>();
+                }
+                else
+                {
+                    throw new Exception(response.ReasonPhrase);
+                }
+            }
+        }
     }
 }

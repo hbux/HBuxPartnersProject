@@ -1,39 +1,34 @@
-﻿@{
+﻿@model Dictionary<string, List<HBPUI.Library.Models.CategoryModel>>
+@{
+    string category = (string)ViewData["Category"];
 
+    ViewData["Title"] = $"View All { category }";
 }
 
 <div class="container">
     <div class="row align-items-md-stretch g-2 g-lg-3">
-        <div class="col-md-6">
-            <div class="h-100 p-3 bg-light border rounded-3">
-                <h2>TV &amp; Audio</h2>
-                <div class="list-group">
-                    <a href="#" class="list-group-item list-group-item-action">A second link item</a>
-                    <a href="#" class="list-group-item list-group-item-action">A third link item</a>
-                    <a href="#" class="list-group-item list-group-item-action">A fourth link item</a>
+        @foreach (var basic in Model.Keys)
+        {
+            <div class="col-md-6">
+                <div class="h-100 p-3 bg-light border rounded-3">
+                    <h2>@basic</h2>
+                    <div class="list-group">
+                        @foreach (var subcategory in Model[basic])
+                        {
+                            <a  
+                                asp-area=""
+                                asp-controller="Browse"
+                                asp-action="Categories"
+                                asp-route-category="@category"
+                                asp-route-subcategory="@basic"
+                                asp-route-type="@subcategory.Title"
+                                class="list-group-item list-group-item-action">@subcategory.Title
+                            </a>  
+                        }
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-6">
-            <div class="h-100 p-3 bg-light border rounded-3">
-                <h2>Computing &amp; Gaming</h2>
-                <div class="list-group">
-                    <a href="#" class="list-group-item list-group-item-action">A second link item</a>
-                    <a href="#" class="list-group-item list-group-item-action">A third link item</a>
-                    <a href="#" class="list-group-item list-group-item-action">A fourth link item</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="h-100 p-3 bg-light border rounded-3">
-                <h2>Small Devices</h2>
-                <div class="list-group">
-                    <a href="#" class="list-group-item list-group-item-action">A second link item</a>
-                    <a href="#" class="list-group-item list-group-item-action">A third link item</a>
-                    <a href="#" class="list-group-item list-group-item-action">A fourth link item</a>
-                </div>
-            </div>
-        </div>
+        }
     </div>
 </div>
 
@@ -42,7 +37,7 @@
         <a 
             asp-area="" 
             asp-controller="Browse" 
-            asp-action="Category">CategoryName
+            asp-action="Category">@category
         </a>
     </li>
 }

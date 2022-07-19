@@ -6,6 +6,6 @@ namespace HBPWebUI.Helpers
 {
     public interface ICategoryHelper
     {
-        List<CategoryViewModel> CreateNestedCategories(List<CategoryModel> ulCategories);
+        List<CategoriesViewModel> CreateNestedCategories(List<CategoryModel> ulCategories);
     }
 }
