@@ -1,5 +1,6 @@
 using HBPUI.Library.Api;
 using HBPUI.Library.Endpoint;
+using HBPWebUI.Helpers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +11,9 @@ builder.Services.AddDistributedMemoryCache();
 builder.Services.AddTransient<IApiSetup, ApiSetup>();
 builder.Services.AddTransient<IProductEndpoint, ProductEndpoint>();
 builder.Services.AddTransient<ICategoryEndpoint, CategoryEndpoint>();
+builder.Services.AddTransient<IProductHelper, ProductHelper>();
+builder.Services.AddTransient<ICategoryHelper, CategoryHelper>();
+
 
 var app = builder.Build();
 

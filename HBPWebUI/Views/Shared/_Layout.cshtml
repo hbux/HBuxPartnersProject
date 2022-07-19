@@ -1,6 +1,7 @@
 ﻿@inject HBPUI.Library.Endpoint.ICategoryEndpoint categoryEndpoint
+@inject HBPWebUI.Helpers.ICategoryHelper categoryHelper
 @{
-    var categories = await categoryEndpoint.GetAllCategories();
+    var categories = categoryHelper.CreateNestedCategories(await categoryEndpoint.GetAllCategories());
 }
 
 <!DOCTYPE html>

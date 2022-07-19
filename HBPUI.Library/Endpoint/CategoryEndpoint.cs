@@ -22,13 +22,13 @@ namespace HBPUI.Library.Endpoint
         /// </summary>
         /// <returns>A list of ordered categories</returns>
         /// <exception cref="Exception"></exception>
-        public async Task<List<NestedCategoryModel>> GetAllCategories()
+        public async Task<List<CategoryModel>> GetAllCategories()
         {
             using (HttpResponseMessage response = await _api.Client.GetAsync("api/categories/getall"))
             {
                 if (response.IsSuccessStatusCode)
                 {
-                    return await response.Content.ReadAsAsync<List<NestedCategoryModel>>();
+                    return await response.Content.ReadAsAsync<List<CategoryModel>>();
                 }
                 else
                 {

@@ -6,6 +6,6 @@ namespace HBPUI.Library.Endpoint
 {
     public interface ICategoryEndpoint
     {
-        Task<List<NestedCategoryModel>> GetAllCategories();
+        Task<List<CategoryModel>> GetAllCategories();
     }
 }

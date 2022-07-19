@@ -1,10 +1,11 @@
-﻿using HBPApi.Library.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
+using HBPUI.Library.Models;
+using HBPWebUI.Models;
 
-namespace HBPApi.Library.Helpers
+namespace HBPWebUI.Helpers
 {
     public class CategoryHelper : ICategoryHelper
     {
@@ -13,15 +14,15 @@ namespace HBPApi.Library.Helpers
         /// </summary>
         /// <param name="ulCategories">An unordered list of all categories</param>
         /// <returns>A list of ordered categories</returns>
-        public List<NestedCategoryModel> CreateNestedCategories(List<CategoryModel> ulCategories)
+        public List<CategoryViewModel> CreateNestedCategories(List<CategoryModel> ulCategories)
         {
-            List<NestedCategoryModel> nestedCategories = new List<NestedCategoryModel>();
+            List<CategoryViewModel> nestedCategories = new List<CategoryViewModel>();
 
             List<CategoryModel> superordinates = ulCategories.FindAll(x => x.Level == 0);
 
             foreach (CategoryModel superordinate in superordinates)
             {
-                NestedCategoryModel nestedCategory = new NestedCategoryModel();
+                CategoryViewModel nestedCategory = new CategoryViewModel();
                 nestedCategory.Superordinate = superordinate;
 
                 List<CategoryModel> basics = ulCategories.FindAll(x => x.Level == 1);

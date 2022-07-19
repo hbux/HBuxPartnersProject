@@ -1,5 +1,4 @@
 ﻿using HBPApi.Library.Data;
-using HBPApi.Library.Helpers;
 using HBPApi.Library.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
