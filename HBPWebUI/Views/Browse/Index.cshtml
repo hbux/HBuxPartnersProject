@@ -6,7 +6,7 @@
 <div class="container">
     <div class="d-flex row row-cols-1 row-cols-md-2">
         <div class="col-md-3 flex-shrink-0 p-3 bg-white">
-            <a href="/" class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
+            <a class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
                 <span class="fs-5 fw-semibold">All categories</span>
             </a>
             <ul class="list-unstyled ps-0">
@@ -35,6 +35,15 @@
                                         </li>
                                     }
                                 }
+                                <li>
+                                    <a 
+                                        asp-area="" 
+                                        asp-controller="Browse" 
+                                        asp-action="Category" 
+                                        asp-route-category="@category.Superordinate.Title"
+                                        class="link-dark rounded">View all
+                                    </a>
+                                </li>
                             </ul>
                         </div>
                     </li>

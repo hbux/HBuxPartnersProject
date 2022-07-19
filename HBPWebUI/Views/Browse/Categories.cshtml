@@ -65,26 +65,9 @@
         <a 
             asp-area="" 
             asp-controller="Browse" 
-            asp-action="Index">@categoryName
+            asp-action="Category">@categoryName
         </a>
     </li>
-    <li class="breadcrumb-item active">
-        <a 
-            asp-area="" 
-            asp-controller="Browse" 
-            asp-action="Categories" 
-            asp-route-category="@categoryName" 
-            asp-route-subcategory="@subcategoryName">@subcategoryName
-        </a>
-    </li>
-    <li class="breadcrumb-item active" aria-current="page">
-        <a 
-            asp-area="" 
-            asp-controller="Browse" 
-            asp-action="Categories" 
-            asp-route-category="@categoryName" 
-            asp-route-subcategory="@subcategoryName" 
-            asp-route-type="@typeName">@typeName
-        </a>
-    </li>
+    <li class="breadcrumb-item" aria-current="page">@subcategoryName</li>
+    <li class="breadcrumb-item" aria-current="page">@typeName</li>
 }

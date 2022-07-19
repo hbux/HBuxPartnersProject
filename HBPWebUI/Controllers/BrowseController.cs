@@ -34,6 +34,12 @@ namespace HBPWebUI.Controllers
 
         public async Task<IActionResult> Categories(string category, string subcategory, string type)
         {
+            if ((string.IsNullOrEmpty(category) == false) && string.IsNullOrEmpty(subcategory) || 
+                string.IsNullOrEmpty(type))
+            {
+                return View("Category", category);
+            }
+
             if (string.IsNullOrEmpty(category) || string.IsNullOrEmpty(subcategory) || 
                 string.IsNullOrEmpty(type))
             {
@@ -48,6 +54,13 @@ namespace HBPWebUI.Controllers
                 _productHelper.TranslateProducts(await _productEndpoint.GetAllProducts(type));
 
             return View(categoryProducts);
+        }
+
+        public IActionResult Category(string category)
+        {
+            // Get specific category
+
+            return View();
         }
 
         public async Task<IActionResult> Product(int name)
@@ -69,11 +82,9 @@ namespace HBPWebUI.Controllers
 
                 TempData["SuccessMessage"] = "Added to basket!";
 
-                // if has used quick add redirect them back to categories and pass in all category types
                 return RedirectToAction("Product", new { name = displayProduct.Product.Id });
             }
 
-            // if has used quick add redirect them back to categories and pass in all category types
             return View("Product", displayProduct);
         }
     }

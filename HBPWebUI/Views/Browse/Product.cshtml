@@ -7,6 +7,19 @@
     <input type="hidden" asp-for="@Model.Product.Id" />
     <div class="container pb-5 border-bottom">
         <div class="row row-cols-1 row-cols-md-2">
+            @if (TempData["SuccessMessage"] != null)
+            {
+                <div class="col-sm d-md-none">
+                    <div class="alert alert-success alert-dismissible fade show d-flex align-items-center" role="alert">
+                        <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        <div>
+                        @TempData["SuccessMessage"]
+                        </div>
+                    </div>
+                </div>
+            }
+            <span class="col-sm d-md-none text-danger text-center" asp-validation-for="@Model.Quantity"></span>
             <div class="col">
                 <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-indicators">
@@ -82,15 +95,17 @@
                 }
                 @if (TempData["SuccessMessage"] != null)
                 {
-                    <div class="alert alert-success alert-dismissible fade show d-flex align-items-center" role="alert">
-                        <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        <div>
-                        @TempData["SuccessMessage"]
+                    <div class="d-none d-md-block col-md">
+                        <div class="alert alert-success alert-dismissible fade show d-flex align-items-center" role="alert">
+                            <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            <div>
+                            @TempData["SuccessMessage"]
+                            </div>
                         </div>
                     </div>
                 }
-                <span class="text-danger text-center" asp-validation-for="@Model.Quantity"></span>
+                <span class="d-none d-md-block text-danger text-center" asp-validation-for="@Model.Quantity"></span>
             </div>
         </div>
     </div>
@@ -138,7 +153,7 @@
 </form>
 
 @section Breadcrumb {
-    <li class="breadcrumb-item active" aria-current="page">@Model.Product.ShortName</li>
+    <li class="breadcrumb-item" aria-current="page">@Model.Product.ShortName</li>
 }
 
 <script>
