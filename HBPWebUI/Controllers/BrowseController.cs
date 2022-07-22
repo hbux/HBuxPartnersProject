@@ -9,16 +9,18 @@ namespace HBPWebUI.Controllers
     public class BrowseController : Controller
     {
         private readonly ILogger<BrowseController> _logger;
+        private readonly IBasketHelper _basketHelper;
         private readonly ICategoryHelper _categoryHelper;
         private readonly IProductHelper _productHelper;
         private readonly ICategoryEndpoint _categoryEndpoint;
         private readonly IProductEndpoint _productEndpoint;
 
-        public BrowseController(ILogger<BrowseController> logger, ICategoryHelper categoryHelper,
+        public BrowseController(ILogger<BrowseController> logger, IBasketHelper basketHelper, ICategoryHelper categoryHelper,
             IProductHelper productHelper, ICategoryEndpoint categoryEndpoint, 
             IProductEndpoint productEndpoint)
         {
             _logger = logger;
+            _basketHelper = basketHelper;
             _categoryHelper = categoryHelper;
             _productHelper = productHelper;
             _categoryEndpoint = categoryEndpoint;
@@ -80,11 +82,25 @@ namespace HBPWebUI.Controllers
             ProductViewModel displayProduct = 
                 _productHelper.TranslateProduct(await _productEndpoint.GetProduct(display.Product.Id));
 
+            if (displayProduct.Product.QuantityInStock < display.Quantity)
+            {
+                ModelState.AddModelError("Quantity", $"We're sorry, we only have {displayProduct.Product.QuantityInStock} available.");
+                return View("Product", displayProduct);
+            }
+
             if (ModelState.IsValid)
             {
-                // Add to basket
+                BasketModel basket = _basketHelper.GetSessionBasket(HttpContext);
 
-                TempData["SuccessMessage"] = "Added to basket!";
+                basket.AddToBasket(new BasketItemModel()
+                {
+                    Product = displayProduct.Product,
+                    QuantityInBasket = display.Quantity
+                });
+
+                _basketHelper.SetSessionBasket(HttpContext, basket);
+
+                TempData["SuccessMessage"] = $"Added x{ display.Quantity } to basket!";
 
                 return RedirectToAction("Product", new { name = displayProduct.Product.Id });
             }

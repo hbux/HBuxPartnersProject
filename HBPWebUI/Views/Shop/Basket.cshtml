@@ -1,17 +1,25 @@
-﻿@*
-{
+﻿@model HBPUI.Library.Models.BasketModel
+@{
     ViewData["Title"] = "Basket";
 }
 
 <main>
     <div class="container py-5">
         <form>
-            <div class="py-1 text-center">
-                <h2>Basket (Model.Basket.Count)</h2>
+            <div class="py-3 text-center">
+                <h2>Basket (@Model.BasketItems.Count)</h2>
             </div>
-            @if (Model.Basket.Count == 0)
+            @if (Model.BasketItems.Count == 0)
             {
-                
+                <div class="alert alert-primary text-center" role="alert">
+                    <div class="d-flex align-items-center mb-3 justify-content-center">
+                        <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Info:"><use xlink:href="#info-fill"/></svg>
+                        <h4 class="alert-heading m-0">No items</h4>
+                    </div>
+                    <p>Your basket is empty.</p>
+                    <hr>
+                    <a class="btn btn-primary mb-0" asp-area="" asp-controller="Browse" asp-action="Index">Continue shopping</a>
+                </div>
             }
             else
             {
@@ -20,22 +28,22 @@
                         <div class="pb-3">
                             <h4 class="d-flex justify-content-between align-items-center mb-3">
                             <span class="text-primary">Summary</span>
-                            <span class="badge bg-primary rounded-pill">@Model.Basket.Count</span>
+                            <span class="badge bg-primary rounded-pill">@Model.BasketItems.Count</span>
                             </h4>
                             <ul class="list-group mb-3">
-                                @foreach (var basketItem in Model.Basket)
+                                @foreach (var basketItem in Model.BasketItems)
                                 {
                                     <li class="list-group-item d-flex justify-content-between lh-sm">
                                         <div>
                                             <h6 class="my-0">@basketItem.Product.ShortName</h6>
-                                            <small class="text-muted">Quantity: @basketItem.Quantity</small>
+                                            <small class="text-muted">Quantity: @basketItem.QuantityInBasket</small>
                                         </div>
                                         <span class="text-muted">@basketItem.Product.RetailPrice.ToString("C2")</span>
                                     </li>
                                 }
                                 <li class="list-group-item d-flex justify-content-between">
-                                    <span>Total</span>
-                                    <strong>@Model.Total.ToString("C2")</strong>
+                                    <span>Subtotal</span>
+                                    <strong>@Model.Subtotal.ToString("C2")</strong>
                                 </li>
                             </ul>
                         </div>
@@ -50,7 +58,7 @@
                                         <h6 class="my-0">Stardard delivery</h6>
                                         <small class="text-muted">5 days</small>
                                     </div>
-                                    <span class="text-muted">FREE</span>
+                                    @*<span class="text-muted">FREE</span>*@
                                     <span class="text-muted">£1.50</span>
                                 </li>
                                 <li class="list-group-item d-flex justify-content-between lh-sm">
@@ -81,13 +89,13 @@
                                         </div>
                                     </div>
                                 }
-                                <a asp-area="" asp-controller="Home" asp-action="Checkout" class="btn btn-primary btn-lg" type="button">Go to checkout</a>
+                                <a asp-area="" asp-controller="Shop" asp-action="Checkout" class="btn btn-primary btn-lg" type="button">Go to checkout</a>
                             </div>
                         </form>
                     </div>
                     <div class="col-md-7 col-lg-8">
                         <div class="row row-cols-1">
-                            @foreach (var basketItem in Model.Basket)
+                            @foreach (var basketItem in Model.BasketItems)
                             {
                                 <div class="row gy-3">
                                     <div class="card">
@@ -106,7 +114,7 @@
                                                             <p class="fw-normal m-0">Quantity:</p>
                                                         </div>
                                                         <div class="col-5">
-                                                            <input class="form-control disabled" type="number" value="@basketItem.Quantity" aria-label="default input example">
+                                                            <input class="form-control disabled" type="number" value="@basketItem.QuantityInBasket" aria-label="default input example">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -128,4 +136,4 @@
             }
         </form>
     </div>
-</main>*@
+</main>

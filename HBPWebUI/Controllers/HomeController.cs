@@ -9,20 +9,13 @@ namespace HBPWebUI.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly IProductEndpoint _productEndpoint;
 
-        public HomeController(ILogger<HomeController> logger, IProductEndpoint productEndpoint)
+        public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
-            _productEndpoint = productEndpoint;
         }
 
         public IActionResult Index()
-        {
-            return View();
-        }
-
-        public IActionResult Basket()
         {
             return View();
         }

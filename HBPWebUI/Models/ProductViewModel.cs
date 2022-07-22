@@ -9,6 +9,9 @@ namespace HBPWebUI.Models
 {
     public class ProductViewModel
     {
+        [TempData]
+        public string ErrorMessage { get; set; }
+
         [BindProperty]
         public ProductModel Product { get; set; }
 

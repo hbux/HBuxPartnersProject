@@ -8,11 +8,19 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddDistributedMemoryCache();
 
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
+
 builder.Services.AddTransient<IApiSetup, ApiSetup>();
 builder.Services.AddTransient<IProductEndpoint, ProductEndpoint>();
 builder.Services.AddTransient<ICategoryEndpoint, CategoryEndpoint>();
 builder.Services.AddTransient<IProductHelper, ProductHelper>();
 builder.Services.AddTransient<ICategoryHelper, CategoryHelper>();
+builder.Services.AddTransient<IBasketHelper, BasketHelper>();
 
 
 var app = builder.Build();
@@ -29,6 +37,8 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+app.UseSession();
 
 app.UseAuthorization();
 

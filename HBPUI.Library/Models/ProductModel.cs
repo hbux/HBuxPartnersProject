@@ -39,9 +39,9 @@ namespace HBPUI.Library.Models
         {
             get
             {
-                if (Name.Length > 15)
+                if (Name.Length > 25)
                 {
-                    return $"{Name.Substring(0, 15).Trim()}...";
+                    return $"{Name.Substring(0, 25).Trim()}...";
                 }
 
                 return Name;
