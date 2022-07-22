@@ -7,7 +7,7 @@
     <div class="container py-5">
         <form>
             <div class="py-3 text-center">
-                <h2>Basket (@Model.BasketItems.Count)</h2>
+                <h1 class="h4 mb-3 fw-normal">Basket (@Model.BasketItems.Count)</h1>
             </div>
             @if (Model.BasketItems.Count == 0)
             {
@@ -23,8 +23,50 @@
             }
             else
             {
-                <div class="row g-5">
-                    <div class="col-md-5 col-lg-4 order-md-last">
+                <div class="d-flex row">
+                    <div class="col-md-7 col-lg-8">
+                        @foreach (var basketItem in Model.BasketItems)
+                        {
+                            <div class="card mb-3">
+                                <div class="row g-0">
+                                    <div class="col-2">
+                                        <img src="/images/@basketItem.Product.Thumbnail.GetFullUri" class="img-fluid rounded-start" alt="..." />
+                                    </div>
+                                    <div class="col-8">
+                                        <div class="card-body">
+                                            <h5 class="card-title fw-normal mb-3">@basketItem.Product.Name</h5>
+                                            <h6 class="card-subtitle my-3 fw-bold">@basketItem.Product.RetailPrice.ToString("C2")</h6>
+                                            <div class="btn-group" role="group" aria-label="Basic outlined example">
+                                                <form>
+                                                    <button type="button" class="btn btn-outline-primary" style="border-radius: .25rem">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dash-lg" viewBox="0 0 16 16">
+                                                            <path fill-rule="evenodd" d="M2 8a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11A.5.5 0 0 1 2 8Z"/>
+                                                        </svg>
+                                                    </button>
+                                                </form>
+                                                    <button type="button" class="btn btn-outline-primary disabled mx-2" style="border-radius: .25rem">@basketItem.QuantityInBasket</button>
+                                                <form>
+                                                    <button type="button" class="btn btn-outline-primary" style="border-radius: .25rem">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                                                            <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
+                                                        </svg>
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-1">
+                                        <div class="card-body">
+                                            <form>
+                                                <button type="button" class="btn-close" aria-label="Close"></button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                    <div class="col-md-5 col-lg-4 mt-5">
                         <div class="pb-3">
                             <h4 class="d-flex justify-content-between align-items-center mb-3">
                             <span class="text-primary">Summary</span>
@@ -92,45 +134,6 @@
                                 <a asp-area="" asp-controller="Shop" asp-action="Checkout" class="btn btn-primary btn-lg" type="button">Go to checkout</a>
                             </div>
                         </form>
-                    </div>
-                    <div class="col-md-7 col-lg-8">
-                        <div class="row row-cols-1">
-                            @foreach (var basketItem in Model.BasketItems)
-                            {
-                                <div class="row gy-3">
-                                    <div class="card">
-                                        <div class="row row-cols-3">
-                                            <div class="col-3">
-                                                <div class="card-body">
-                                                    <img src="~/images/@basketItem.Product.Thumbnail.GetFullUri" width="100%" height="100%" />
-                                                </div>
-                                            </div>
-                                            <div class="col-7">
-                                                <div class="card-body">
-                                                    <h5 class="card-title fw-normal">@basketItem.Product.Name</h5>
-                                                    <h6 class="card-subtitle my-3 fw-bold">@basketItem.Product.RetailPrice.ToString("C2")</h6>
-                                                    <div class="row py-3">
-                                                        <div class="col-7 d-flex align-items-center">
-                                                            <p class="fw-normal m-0">Quantity:</p>
-                                                        </div>
-                                                        <div class="col-5">
-                                                            <input class="form-control disabled" type="number" value="@basketItem.QuantityInBasket" aria-label="default input example">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-2">
-                                                <div class="card-body">
-                                                    <form>
-                                                        <button type="button" class="btn-close" aria-label="Close"></button>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            }
-                        </div>
                     </div>
                 </div>
             }
