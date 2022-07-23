@@ -15,6 +15,8 @@ builder.Services.AddSession(options =>
     options.Cookie.IsEssential = true;
 });
 
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
 builder.Services.AddTransient<IApiSetup, ApiSetup>();
 builder.Services.AddTransient<IProductEndpoint, ProductEndpoint>();
 builder.Services.AddTransient<ICategoryEndpoint, CategoryEndpoint>();

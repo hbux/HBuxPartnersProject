@@ -10,6 +10,13 @@ namespace HBPUI.Library.Models
         public int Id { get; set; }
         public DateTime DateCreated { get; set; } = DateTime.UtcNow;
         public List<BasketItemModel> BasketItems { get; set; } = new List<BasketItemModel>();
+        public int TotalItems
+        {
+            get
+            {
+                return BasketItems.Sum(x => x.QuantityInBasket);
+            }
+        }
         public decimal Subtotal
         {
             get
