@@ -77,15 +77,15 @@ namespace HBPWebUI.Controllers
             return View(product);
         }
 
-        public async Task<IActionResult> AddToBasket(ProductViewModel display)
+        public async Task<IActionResult> AddToBasket(ProductViewModel model)
         {
-            ProductViewModel displayProduct = 
-                _productHelper.TranslateProduct(await _productEndpoint.GetProduct(display.Product.Id));
+            ProductViewModel display = 
+                _productHelper.TranslateProduct(await _productEndpoint.GetProduct(model.Product.Id));
 
-            if (displayProduct.Product.QuantityInStock < display.Quantity)
+            if (display.Product.QuantityInStock < model.Quantity)
             {
-                ModelState.AddModelError("Quantity", $"We're sorry, we only have {displayProduct.Product.QuantityInStock} available.");
-                return View("Product", displayProduct);
+                ModelState.AddModelError("Quantity", $"We're sorry, we only have {display.Product.QuantityInStock} available.");
+                return View("Product", display);
             }
 
             if (ModelState.IsValid)
@@ -94,18 +94,18 @@ namespace HBPWebUI.Controllers
 
                 basket.AddToBasket(new BasketItemModel()
                 {
-                    Product = displayProduct.Product,
-                    QuantityInBasket = display.Quantity
+                    Product = display.Product,
+                    QuantityInBasket = model.Quantity
                 });
 
                 _basketHelper.SetSessionBasket(HttpContext, basket);
 
-                TempData["SuccessMessage"] = $"Added x{ display.Quantity } to basket!";
+                TempData["SuccessMessage"] = $"Added x{ model.Quantity } to basket!";
 
-                return RedirectToAction("Product", new { name = displayProduct.Product.Id });
+                return RedirectToAction("Product", new { name = display.Product.Id });
             }
 
-            return View("Product", displayProduct);
+            return View("Product", display);
         }
     }
 }

@@ -23,41 +23,35 @@
             <p class="mb-0">This category might be temporarily out of stock. Try looking for alternative products within the departments.</p>
         </div>
     }
-    <form asp-action="AddToBasket">
-        <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-2 g-lg-3">
-            @foreach (var display in Model)
-            {
-                <input type="hidden" asp-for="@display.Product.Id" />
-                <input type="hidden" asp-for="@display.Quantity" />
-                <div class="col">
-                    <a class="text-decoration-none" asp-area="" asp-controller="Browse" asp-action="Product" asp-route-name="@display.Product.Id">
-                        <div class="card" style="width: unset; height: 100%" >
-                            <img src="~/images/@display.Product.Thumbnail.GetFullUri" class="card-img-top" alt="Xbox Series X">
-                            <div class="card-body">
-                                <p class="fw-normal text-black d-block text-truncate text-wrap" style="max-width: 100%; height: 100px; max-height: 100px;">@display.Product.Name</p>
-                                <div class="align-text-bottom">
-                                    <ul class="list-group list-group-flush border-bottom my-1">
-                                        <li class="list-group-item fw-bold px-0">@display.Product.RetailPrice.ToString("C2")</li>
-                                    </ul>
-                                    <div class="d-grid my-2">
-                                        @if (display.Product.IsInStock)
-                                        {
-                                            <button type="submit" class="btn btn-primary my-1">Add to basket</button>
+    <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-2 g-lg-3">
+        @foreach (var display in Model)
+        {
+            <a class="text-decoration-none" asp-area="" asp-controller="Browse" asp-action="Product" asp-route-name="@display.Product.Id">
+                <div class="card" style="width: unset; height: 100%" >
+                    <img src="~/images/@display.Product.Thumbnail.GetFullUri" class="card-img-top" alt="Xbox Series X">
+                    <div class="card-body">
+                        <p class="fw-normal text-black d-block text-truncate text-wrap" style="max-width: 100%; height: 100px; max-height: 100px;">@display.Product.Name</p>
+                        <div class="align-text-bottom">
+                            <ul class="list-group list-group-flush border-bottom my-1">
+                                <li class="list-group-item fw-bold px-0">@display.Product.RetailPrice.ToString("C2")</li>
+                            </ul>
+                            <div class="d-grid my-2">
+                                @if (display.Product.IsInStock)
+                                {
+                                    <button type="submit" class="btn btn-primary my-1">Add to basket</button>
                                             
-                                        }
-                                        else
-                                        {
-                                            <button type="submit" class="btn btn-warning disabled my-1">Out of stock</button>
-                                        }
-                                    </div>
-                                </div>
+                                }
+                                else
+                                {
+                                    <button type="submit" class="btn btn-warning disabled my-1">Out of stock</button>
+                                }
                             </div>
                         </div>
-                    </a>
+                    </div>
                 </div>
-            }
-        </div>
-    </form>
+            </a>
+        }
+    </div>
 </div>
 
 @section Breadcrumb {

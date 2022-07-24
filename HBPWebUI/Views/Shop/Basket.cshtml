@@ -5,138 +5,137 @@
 
 <main>
     <div class="container py-5">
-        <form>
-            <div class="py-3 text-center">
-                <h1 class="h4 mb-3 fw-normal">Basket (@Model.TotalItems)</h1>
-            </div>
-            @if (Model.BasketItems.Count == 0)
-            {
-                <div class="alert alert-primary text-center" role="alert">
-                    <div class="d-flex align-items-center mb-3 justify-content-center">
-                        <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Info:"><use xlink:href="#info-fill"/></svg>
-                        <h4 class="alert-heading m-0">No items</h4>
-                    </div>
-                    <p>Your basket is empty.</p>
-                    <hr>
-                    <a class="btn btn-primary mb-0" asp-area="" asp-controller="Browse" asp-action="Index">Continue shopping</a>
+        <div class="py-3 text-center">
+            <h1 class="h4 mb-3 fw-normal">Basket (@Model.TotalItems)</h1>
+        </div>
+        @if (Model.BasketItems.Count == 0)
+        {
+            <div class="alert alert-primary text-center" role="alert">
+                <div class="d-flex align-items-center mb-3 justify-content-center">
+                    <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Info:"><use xlink:href="#info-fill"/></svg>
+                    <h4 class="alert-heading m-0">No items</h4>
                 </div>
-            }
-            else
-            {
-                <div class="d-flex row">
-                    <div class="col-md-7 col-lg-8">
-                        @foreach (var basketItem in Model.BasketItems)
-                        {
-                            <div class="card mb-3">
-                                <div class="row g-0">
-                                    <div class="col-2">
-                                        <img src="/images/@basketItem.Product.Thumbnail.GetFullUri" class="img-fluid rounded-start" alt="..." />
-                                    </div>
-                                    <div class="col-8">
-                                        <div class="card-body">
-                                            <h5 class="card-title fw-normal mb-3">@basketItem.Product.Name</h5>
-                                            <h6 class="card-subtitle my-3 fw-bold">@basketItem.Product.RetailPrice.ToString("C2")</h6>
-                                            <div class="btn-group" role="group" aria-label="Basic outlined example">
-                                                <form>
-                                                    <button type="button" class="btn btn-outline-primary" style="border-radius: .25rem">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dash-lg" viewBox="0 0 16 16">
-                                                            <path fill-rule="evenodd" d="M2 8a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11A.5.5 0 0 1 2 8Z"/>
-                                                        </svg>
-                                                    </button>
-                                                </form>
-                                                    <button type="button" class="btn btn-outline-primary disabled mx-2" style="border-radius: .25rem">@basketItem.QuantityInBasket</button>
-                                                <form>
-                                                    <button type="button" class="btn btn-outline-primary" style="border-radius: .25rem">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
-                                                            <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
-                                                        </svg>
-                                                    </button>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-1">
-                                        <div class="card-body">
-                                            <form>
-                                                <button type="button" class="btn-close" aria-label="Close"></button>
+                <p>Your basket is empty.</p>
+                <hr>
+                <a class="btn btn-primary mb-0" asp-area="" asp-controller="Browse" asp-action="Index">Continue shopping</a>
+            </div>
+        }
+        else
+        {
+            <div class="d-flex row">
+                <div class="col-md-7 col-lg-8">
+                    @foreach (var basketItem in Model.BasketItems)
+                    {
+                        <div class="card mb-3">
+                            <div class="row g-0">
+                                <div class="col-2">
+                                    <img src="/images/@basketItem.Product.Thumbnail.GetFullUri" class="img-fluid rounded-start" alt="..." />
+                                </div>
+                                <div class="col-8">
+                                    <div class="card-body">
+                                        <h5 class="card-title fw-normal mb-3">@basketItem.Product.Name</h5>
+                                        <h6 class="card-subtitle my-3 fw-bold">@basketItem.Product.RetailPrice.ToString("C2")</h6>
+                                        <div class="btn-group" role="group" aria-label="Basic outlined example">
+                                            <form asp-action="Decrement" asp-route-name="@basketItem.Product.Id">
+                                                <input type="hidden" asp-for="@basketItem.Product.Id" />
+                                                <button type="submit" class="btn btn-outline-primary" style="border-radius: .25rem">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dash-lg" viewBox="0 0 16 16">
+                                                        <path fill-rule="evenodd" d="M2 8a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11A.5.5 0 0 1 2 8Z"/>
+                                                    </svg>
+                                                </button>
+                                            </form>
+                                                <button type="button" class="btn btn-outline-primary disabled mx-2" style="border-radius: .25rem">@basketItem.QuantityInBasket</button>
+                                            <form asp-action="Increment" asp-route-name="@basketItem.Product.Id">
+                                                <input type="hidden" asp-for="@basketItem.Product.Id" />
+                                                <button type="submit" class="btn btn-outline-primary" style="border-radius: .25rem">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                                                        <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
+                                                    </svg>
+                                                </button>
                                             </form>
                                         </div>
                                     </div>
                                 </div>
+                                <div class="col-1">
+                                    <div class="card-body">
+                                        <form asp-action="Remove" asp-route-name="@basketItem.Product.Id">
+                                            <input type="hidden" asp-for="@basketItem.Product.Id" />
+                                            <button type="submit" class="btn-close" aria-label="Close"></button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+                <div class="col-md-5 col-lg-4 mt-5">
+                    <div class="pb-3">
+                        <h4 class="d-flex justify-content-between align-items-center mb-3">
+                        <span class="text-primary">Summary</span>
+                        <span class="badge bg-primary rounded-pill">@Model.TotalItems</span>
+                        </h4>
+                        <ul class="list-group mb-3">
+                            @foreach (var basketItem in Model.BasketItems)
+                            {
+                                <li class="list-group-item d-flex justify-content-between lh-sm">
+                                    <div>
+                                        <h6 class="my-0">@basketItem.Product.ShortName</h6>
+                                        <small class="text-muted">Quantity: @basketItem.QuantityInBasket</small>
+                                    </div>
+                                    <span class="text-muted">@basketItem.Product.RetailPrice.ToString("C2")</span>
+                                </li>
+                            }
+                            <li class="list-group-item d-flex justify-content-between">
+                                <span>Subtotal</span>
+                                <strong>@Model.Subtotal.ToString("C2")</strong>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="pt-2">
+                        <h4 class="d-flex justify-content-between align-items-center mb-1">
+                            <span class="text-primary">Delivery options</span>
+                        </h4>
+                        <p class="text-muted mb-1">Please choose at checkout.</p>
+                        <ul class="list-group mb-3">
+                            <li class="list-group-item d-flex justify-content-between lh-sm">
+                                <div>
+                                    <h6 class="my-0">Stardard delivery</h6>
+                                    <small class="text-muted">5 days</small>
+                                </div>
+                                @*<span class="text-muted">FREE</span>*@
+                                <span class="text-muted">£1.50</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between lh-sm">
+                                <div>
+                                    <h6 class="my-0">HB&P Plus+</h6>
+                                    <small class="text-muted">Next day delivery</small>
+                                </div>
+                                <span class="text-muted">£4/pm</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between lh-sm">
+                                <div>
+                                    <h6 class="my-0">HB&P Premium</h6>
+                                    <small class="text-muted">3-hour delivery</small>
+                                </div>
+                                <span class="text-muted">$10/pm</span>
+                            </li>
+                        </ul>
+                    </div>
+                        
+                    <div class="d-grid my-2">
+                        @if (Model.ShowPriceWarning)
+                        {
+                            <div class="alert alert-warning d-flex align-items-center my-2" role="alert">
+                                <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                                <div>
+                                Just a heads up, this basket is over £1,000.
+                                </div>
                             </div>
                         }
-                    </div>
-                    <div class="col-md-5 col-lg-4 mt-5">
-                        <div class="pb-3">
-                            <h4 class="d-flex justify-content-between align-items-center mb-3">
-                            <span class="text-primary">Summary</span>
-                            <span class="badge bg-primary rounded-pill">@Model.TotalItems</span>
-                            </h4>
-                            <ul class="list-group mb-3">
-                                @foreach (var basketItem in Model.BasketItems)
-                                {
-                                    <li class="list-group-item d-flex justify-content-between lh-sm">
-                                        <div>
-                                            <h6 class="my-0">@basketItem.Product.ShortName</h6>
-                                            <small class="text-muted">Quantity: @basketItem.QuantityInBasket</small>
-                                        </div>
-                                        <span class="text-muted">@basketItem.Product.RetailPrice.ToString("C2")</span>
-                                    </li>
-                                }
-                                <li class="list-group-item d-flex justify-content-between">
-                                    <span>Subtotal</span>
-                                    <strong>@Model.Subtotal.ToString("C2")</strong>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="pt-2">
-                            <h4 class="d-flex justify-content-between align-items-center mb-1">
-                                <span class="text-primary">Delivery options</span>
-                            </h4>
-                            <p class="text-muted mb-1">Please choose at checkout.</p>
-                            <ul class="list-group mb-3">
-                                <li class="list-group-item d-flex justify-content-between lh-sm">
-                                    <div>
-                                        <h6 class="my-0">Stardard delivery</h6>
-                                        <small class="text-muted">5 days</small>
-                                    </div>
-                                    @*<span class="text-muted">FREE</span>*@
-                                    <span class="text-muted">£1.50</span>
-                                </li>
-                                <li class="list-group-item d-flex justify-content-between lh-sm">
-                                    <div>
-                                        <h6 class="my-0">HB&P Plus+</h6>
-                                        <small class="text-muted">Next day delivery</small>
-                                    </div>
-                                    <span class="text-muted">£4/pm</span>
-                                </li>
-                                <li class="list-group-item d-flex justify-content-between lh-sm">
-                                    <div>
-                                        <h6 class="my-0">HB&P Premium</h6>
-                                        <small class="text-muted">3-hour delivery</small>
-                                    </div>
-                                    <span class="text-muted">$10/pm</span>
-                                </li>
-                            </ul>
-                        </div>
-                        
-                        <form>
-                            <div class="d-grid my-2">
-                                @if (Model.ShowPriceWarning)
-                                {
-                                    <div class="alert alert-warning d-flex align-items-center my-2" role="alert">
-                                        <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:"><use xlink:href="#exclamation-triangle-fill"/></svg>
-                                        <div>
-                                        Just a heads up, this basket is over £1,000.
-                                        </div>
-                                    </div>
-                                }
-                                <a asp-area="" asp-controller="Shop" asp-action="Checkout" class="btn btn-primary btn-lg" type="button">Go to checkout</a>
-                            </div>
-                        </form>
+                        <a asp-area="" asp-controller="Shop" asp-action="Checkout" class="btn btn-primary btn-lg" type="submit">Go to checkout</a>
                     </div>
                 </div>
-            }
-        </form>
+            </div>
+        }
     </div>
 </main>
